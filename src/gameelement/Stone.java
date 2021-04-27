@@ -60,6 +60,8 @@ public class Stone {
 			position = 7;
 			break;
 		default:
+			System.out.println("Such stone type is not in this variation of Tellstones.");
+			System.out.println("Stone type automatically set to \"The Chip\".");
 			stoneName = "Chip";
 			picURL = "Chip.png";
 		}
