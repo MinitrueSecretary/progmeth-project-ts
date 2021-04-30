@@ -72,7 +72,10 @@ public class Stone {
 		return stoneName;
 	}
 
-
+	public String getUrl() {
+		return picURL;
+	}
+	
 	public boolean isHidden() {
 		return isHidden;
 	}

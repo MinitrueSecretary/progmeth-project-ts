@@ -1,5 +1,6 @@
 package testarea;
 
+import gameelement.StoneButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -18,9 +19,9 @@ public class TestingGrounds1 extends Application {
     	root.setHgap(5);
     	root.setVgap(5);
     	
-    	ImageView img1 = new ImageView(new Image(ClassLoader.getSystemResource("Airplane.png").toString()));
-
-        root.getChildren().add(img1);
+    	StoneButton airplaneButton = new StoneButton("Car");
+    	
+    	root.getChildren().add(airplaneButton);
         
         Scene scene = new Scene(root, 410, 400);
 
