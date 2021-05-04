@@ -15,7 +15,6 @@ public class TestingGrounds1 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
 		FlowPane root = new FlowPane();
     	root.setPadding(new Insets(5));
     	root.setHgap(5);
@@ -25,7 +24,7 @@ public class TestingGrounds1 extends Application {
     	
     	root.getChildren().add(airplaneButton);
         
-        Scene scene = new Scene(root, 410, 400);
+        Scene scene = new Scene(root, 850, 400);
        
 
         primaryStage.setTitle("Main Window");

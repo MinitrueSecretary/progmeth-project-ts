@@ -26,36 +26,36 @@ public class Stone {
 
 	//Getters and Setters
 	public void setStoneName(String stoneName) {
-		switch (stoneName) {
-		case "Chip":
+		switch (stoneName.toLowerCase().trim()) {
+		case "chip":
 			picURL = "Chip.png";
 			position = 0;
 			break;
-		case "Aircraft":
+		case "aircraft":
 			picURL = "Aircraft.png";
 			position = 1;
 			break;
-		case "Factory":
+		case "factory":
 			picURL = "Factory.png";
 			position = 2;
 			break;
-		case "Flask":
+		case "flask":
 			picURL = "Flask.png";
 			position = 3;
 			break;
-		case "Gear":
+		case "gear":
 			picURL = "Gear.png";
 			position = 4;
 			break;
-		case "Lightbulb":
+		case "lightbulb":
 			picURL = "Lightbulb.png";
 			position = 5;
 			break;
-		case "HardHat":
+		case "hardhat":
 			picURL = "HardHat.png";
 			position = 6;
 			break;
-		case "Car":
+		case "car":
 			picURL = "Car.png";
 			position = 7;
 			break;
