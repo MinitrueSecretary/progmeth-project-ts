@@ -13,6 +13,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 public class StoneButton extends Button implements Highlightable{
@@ -26,8 +27,9 @@ public class StoneButton extends Button implements Highlightable{
 		image.setFitHeight(80);
 		image.setFitWidth(80);
 		
+		this.setShape(new Circle(80));
 		this.setGraphic(image);
-		this.setBackground(new Background(new BackgroundFill(Color.MIDNIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.setPadding(new Insets(10));
 		
 		this.setTooltipandHighlight();
@@ -60,7 +62,7 @@ public class StoneButton extends Button implements Highlightable{
 	}
 	
 	public void unhighlight() {
-		this.setBackground(new Background(new BackgroundFill(Color.MIDNIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 		changeIMG(80);
 	}
 	
