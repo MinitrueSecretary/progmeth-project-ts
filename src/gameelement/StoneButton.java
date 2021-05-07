@@ -3,6 +3,7 @@ package gameelement;
 
 import java.util.ArrayList;
 
+import base.Highlightable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -14,7 +15,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class StoneButton extends Button {
+public class StoneButton extends Button implements Highlightable{
 	private Stone stone;
 	private final int SIZE;
 	
@@ -24,6 +25,7 @@ public class StoneButton extends Button {
 		ImageView image = new ImageView(stone.getUrl());
 		image.setFitHeight(80);
 		image.setFitWidth(80);
+		
 		this.setGraphic(image);
 		this.setBackground(new Background(new BackgroundFill(Color.MIDNIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.setPadding(new Insets(10));
@@ -83,4 +85,18 @@ public class StoneButton extends Button {
 		allStones.add(new StoneButton("Lightbulb"));
 		return allStones;
 	}
+
+	//getters and setters
+	public Stone getStone() {
+		return stone;
+	}
+
+	public void setStone(Stone stone) {
+		this.stone = stone;
+	}
+
+	public int getSIZE() {
+		return SIZE;
+	}
+	
 }
