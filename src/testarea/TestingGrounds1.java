@@ -9,6 +9,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -24,8 +27,9 @@ public class TestingGrounds1 extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		GridPane root = new SelectPanel();
-		
-    	Scene scene = new Scene(root, 850, 400);
+		Image img = new Image(ClassLoader.getSystemResource("PlayZone.png").toString());
+		root.setBackground(new Background(new BackgroundImage(img, null, null, null, null)));
+    	Scene scene = new Scene(root, 1000, 200);
 
         primaryStage.setTitle("Main Window");
         primaryStage.setScene(scene);
