@@ -10,9 +10,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class EmptyPlayZone extends Button implements Highlightable {
+public class StonePlaceHolder extends Button implements Highlightable {
 
-	public EmptyPlayZone() {
+	public StonePlaceHolder() {
 		super();
 		this.setShape(new Rectangle(100, 100));
 		this.setStyle("-fx-background-color: Yellow;\r\n -fx-border-color: Black ;\r\n"

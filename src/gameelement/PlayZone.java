@@ -27,9 +27,9 @@ public class PlayZone extends GridPane {
 		Image img = new Image(ClassLoader.getSystemResource("PlayZone.png").toString());
 		this.setBackground(new Background(new BackgroundImage(img, null, null, null, null)));
 		for(int i = 0; i<8;i++) {
-			Button c = new EmptyPlayZone() ;
+			Button c = new StonePlaceHolder() ;
 			this.add(c, i, 0);
-			this.setMargin(c, new Insets(1));
+			PlayZone.setMargin(c, new Insets(1));
 			PlayZone.setHalignment(c,HPos.CENTER);
 			PlayZone.setValignment(c, VPos.CENTER);
 			
