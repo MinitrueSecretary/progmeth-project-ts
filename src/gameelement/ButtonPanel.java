@@ -1,5 +1,13 @@
 package gameelement;
 
+import gameelement.ctrlbutton.BoastButton;
+import gameelement.ctrlbutton.ChallengeButton;
+import gameelement.ctrlbutton.HideButton;
+import gameelement.ctrlbutton.PauseButton;
+import gameelement.ctrlbutton.PeakButton;
+import gameelement.ctrlbutton.PlaceButton;
+import gameelement.ctrlbutton.RemoveButton;
+import gameelement.ctrlbutton.SwapButton;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
