@@ -4,6 +4,7 @@ package gameelement;
 import java.util.ArrayList;
 
 import base.Highlightable;
+import base.Selectable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -16,18 +17,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
-public class StoneButton extends Button implements Highlightable{
+public class StoneButton extends Button implements Highlightable, Selectable{
 	private Stone stone;
 	private final int SIZE;
+	private final int FULLSIZE;
 	
 	public StoneButton(String stoneName) {
 		this.stone = new Stone(stoneName);
 		this.SIZE = 100;
+		this.FULLSIZE = 120;
 		ImageView image = new ImageView(stone.getUrl());
-		image.setFitHeight(80);
-		image.setFitWidth(80);
+		image.setFitHeight(SIZE);
+		image.setFitWidth(SIZE);
 		
-		this.setShape(new Circle(80));
+		this.setShape(new Circle());
 		this.setGraphic(image);
 		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.setPadding(new Insets(10));
@@ -58,12 +61,12 @@ public class StoneButton extends Button implements Highlightable{
 		}
 	public void highlight() {
 		this.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY)));
-		changeIMG(96);
+		changeIMG(FULLSIZE);
 	}
 	
 	public void unhighlight() {
 		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-		changeIMG(80);
+		changeIMG(SIZE);
 	}
 	
 	private void changeIMG(int size) {
@@ -71,7 +74,7 @@ public class StoneButton extends Button implements Highlightable{
 		image.setFitHeight(size);
 		image.setFitWidth(size);
 		this.setGraphic(image);
-		this.setPadding(new Insets((this.SIZE-size)/2));
+		this.setPadding(new Insets((this.FULLSIZE-size)/2));
 		//System.out.println("size =" + size);
 	}
 	

@@ -3,6 +3,7 @@ package testarea;
 import gameelement.PlayZone;
 import gameelement.SelectPanel;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -18,7 +19,7 @@ public class TestingGrounds4 extends Application {
 		Node up = new SelectPanel();
 		VBox root = new VBox();
 		root.getChildren().addAll(pz,up);
-		Scene scene = new Scene(root, 1000, 500);
+		Scene scene = new Scene(root, 1100, 500);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 

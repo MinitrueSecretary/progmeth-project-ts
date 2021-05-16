@@ -1,6 +1,8 @@
 package gameelement;
 
 import base.Highlightable;
+import base.Selectable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -10,7 +12,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class StonePlaceHolder extends Button implements Highlightable {
+public class StonePlaceHolder extends Button implements Highlightable,Selectable {
 
 	public StonePlaceHolder() {
 		super();
@@ -21,7 +23,8 @@ public class StonePlaceHolder extends Button implements Highlightable {
 		//this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.DASHED, CornerRadii.EMPTY, new BorderWidths(5))));
 		super.setDisable(true);
 		this.setVisible(false);
-		this.setPrefSize(100, 100);
+		this.setPrefSize(120, 120);
+		this.setPadding(new Insets(10));
 		//highlight();
 	}
 

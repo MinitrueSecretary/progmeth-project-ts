@@ -10,9 +10,9 @@ public class SelectPanel extends GridPane {
 	
 	public SelectPanel() {
 		this.setAlignment(Pos.CENTER);
-		this.setHgap(10);
-		this.setVgap(10);
-		this.setPadding(new Insets(25, 25, 25, 25));
+		this.setHgap(5);
+		this.setVgap(5);
+		this.setPadding(new Insets(10));
 		for(int i =0; i<8;i++) {
 			StoneButton s = StoneButton.getAllStones().get(i);
 			this.add(s, i, 0);
@@ -20,6 +20,7 @@ public class SelectPanel extends GridPane {
 			this.add(t, i, 1);
 			SelectPanel.setHalignment(s,HPos.CENTER);
 			SelectPanel.setHalignment(t,HPos.CENTER);
+		this.setAlignment(Pos.CENTER);
 			
 		}
 		

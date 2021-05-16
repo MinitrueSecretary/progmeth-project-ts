@@ -16,7 +16,6 @@ public class TestingGrounds3 extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		GridPane root = new PlayZone();
-    	root.setPadding(new Insets(10));
     	//root.getChildren().addAll(StoneButton.getAllStones());
     	
     	Scene scene = new Scene(root, 1000, 200);
