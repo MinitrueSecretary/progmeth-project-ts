@@ -6,8 +6,8 @@ import javafx.scene.layout.GridPane;
 public class ButtonPanel extends GridPane {
 	
 	private Button pauseButton;
-	private Button placeButton;
-	private Button hideButton;
+	private PlaceButton placeButton;
+	private HideButton hideButton;
 	private Button swapButton;
 	private Button removeButton;
 	private Button peakButton;
@@ -21,14 +21,14 @@ public class ButtonPanel extends GridPane {
 	}
 	
 	private void initializeAllButtons() {
-		pauseButton = new Button("||");
-		placeButton = new Button("Place");
-		hideButton = new Button("Hide");
-		swapButton = new Button("Swap");
-		removeButton = new Button("Remove");
-		peakButton = new Button("Peak");
-		challengeButton = new Button("Challenge");
-		boastButton = new Button("Boast");
+		pauseButton = new PauseButton();
+		placeButton = new PlaceButton();
+		hideButton = new HideButton();
+		swapButton = new SwapButton();
+		removeButton = new RemoveButton();
+		peakButton = new PeakButton();
+		challengeButton = new ChallengeButton();
+		boastButton = new BoastButton();
 	}
 	
 	private void addButtonsToPane() {
@@ -51,7 +51,7 @@ public class ButtonPanel extends GridPane {
 		return placeButton;
 	}
 
-	public Button getHideButton() {
+	public HideButton getHideButton() {
 		return hideButton;
 	}
 
