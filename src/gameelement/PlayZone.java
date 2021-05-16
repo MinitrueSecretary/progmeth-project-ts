@@ -37,7 +37,6 @@ public class PlayZone extends GridPane {
 		for(int i = 0; i<8;i++) {
 			Button c = new StonePlaceHolder() ;
 			stoneInPlay.add((Selectable) c);
-			((StonePlaceHolder) c).highlight();	
 		}
 		for(int i = 0;i<8;i++) {
 			this.add((Node) stoneInPlay.get(i), i, 0);

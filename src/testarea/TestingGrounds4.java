@@ -1,7 +1,9 @@
 package testarea;
 
+import gameelement.ButtonPanel;
 import gameelement.PlayZone;
 import gameelement.SelectPanel;
+import gameelement.UtilityPane;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -15,10 +17,10 @@ public class TestingGrounds4 extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		PlayZone pz = new PlayZone();
-		Node bp = new GridPane();
-		Node up = new SelectPanel();
+		Node bp = new ButtonPanel();
+		Node up = new UtilityPane();
 		VBox root = new VBox();
-		root.getChildren().addAll(pz,up);
+		root.getChildren().addAll(pz,bp,up);
 		Scene scene = new Scene(root, 1100, 500);
 		primaryStage.setScene(scene);
 		primaryStage.show();
