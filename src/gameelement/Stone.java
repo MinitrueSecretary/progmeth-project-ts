@@ -64,9 +64,38 @@ public class Stone {
 			System.out.println("Stone type automatically set to \"The Chip\".");
 			stoneName = "Chip";
 			picURL = "Chip.png";
+			position = 0;
 		}
 		this.stoneName = stoneName;
 	}
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((stoneName == null) ? 0 : stoneName.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Stone other = (Stone) obj;
+		if (stoneName == null) {
+			if (other.stoneName != null)
+				return false;
+		} else if (!stoneName.equals(other.stoneName))
+			return false;
+		return true;
+	}
+
 
 	public String getStoneName() {
 		return stoneName;
