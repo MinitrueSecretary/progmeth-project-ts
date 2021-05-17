@@ -7,6 +7,7 @@ import gameelement.CentralPane;
 import gameelement.PlayZone;
 import gameelement.Scoreboard;
 import gameelement.UtilityPaneChallenge;
+import gameelement.UtilityPanePlace;
 import gameelement.StoneButton;
 import javafx.application.Application;
 import javafx.event.Event;
@@ -23,7 +24,7 @@ public class TestingGrounds3 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		GridPane root = new UtilityPaneChallenge();
+		UtilityPanePlace root = new UtilityPanePlace();
     	Scene scene = new Scene(root, 1100, 300);
 
         primaryStage.setTitle("Main Window");

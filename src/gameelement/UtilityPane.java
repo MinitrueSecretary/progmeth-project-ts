@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 public class UtilityPane extends Canvas {
-
+	//this class is for non-interactive utility pane
 	private GraphicsContext gc;
 
 	public UtilityPane() {
@@ -28,7 +28,7 @@ public class UtilityPane extends Canvas {
 		try {
 			this.drawText(buttonname);
 		} catch (ButtonNotExistException e) {
-
+			this.drawDefaultBackground();
 		}
 	}
 
