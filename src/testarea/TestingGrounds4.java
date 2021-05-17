@@ -1,6 +1,7 @@
 package testarea;
 
 import gameelement.ButtonPanel;
+import gameelement.CentralPane;
 import gameelement.PlayZone;
 import gameelement.SelectPanel;
 import gameelement.UtilityPane;
@@ -17,11 +18,11 @@ public class TestingGrounds4 extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		PlayZone pz = new PlayZone();
-		Node bp = new ButtonPanel();
+		Node bp = new CentralPane();
 		Node up = new UtilityPane();
 		VBox root = new VBox();
 		root.getChildren().addAll(pz,bp,up);
-		Scene scene = new Scene(root, 1100, 500);
+		Scene scene = new Scene(root, 1100, 750);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
