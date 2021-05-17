@@ -1,6 +1,6 @@
 package testarea;
 
-import gameelement.SelectPanel;
+import gameelement.UtilityPaneChallenge;
 import gameelement.StoneButton;
 import javafx.application.Application;
 import javafx.collections.ObservableList;

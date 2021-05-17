@@ -3,7 +3,7 @@ package testarea;
 import gameelement.ButtonPanel;
 import gameelement.CentralPane;
 import gameelement.PlayZone;
-import gameelement.SelectPanel;
+import gameelement.UtilityPaneChallenge;
 import gameelement.UtilityPane;
 import javafx.application.Application;
 import javafx.geometry.Insets;

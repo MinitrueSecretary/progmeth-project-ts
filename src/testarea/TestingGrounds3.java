@@ -6,11 +6,13 @@ import gameelement.ButtonPanel;
 import gameelement.CentralPane;
 import gameelement.PlayZone;
 import gameelement.Scoreboard;
+import gameelement.UtilityPaneChallenge;
 import gameelement.StoneButton;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -21,8 +23,8 @@ public class TestingGrounds3 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		HBox root = new CentralPane();
-    	Scene scene = new Scene(root, 1100, 250);
+		GridPane root = new UtilityPaneChallenge();
+    	Scene scene = new Scene(root, 1100, 300);
 
         primaryStage.setTitle("Main Window");
         primaryStage.setScene(scene);

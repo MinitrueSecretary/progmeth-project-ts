@@ -2,7 +2,7 @@ package testarea;
 
 import gameelement.ButtonPanel;
 import gameelement.PlayZone;
-import gameelement.SelectPanel;
+import gameelement.UtilityPaneChallenge;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;

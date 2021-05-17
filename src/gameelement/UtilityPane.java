@@ -57,7 +57,7 @@ public class UtilityPane extends Canvas {
 			break;
 		case "Swap":
 			guide = "Choose two stones to swap position.\n"
-					+ "Note that swapped hideen stones will remain hidden." ;
+					+ "Note that swapped hidden stones will remain hidden." ;
 			gc.fillText(guide, 100, 150);
 			break;
 		case "Peak":
