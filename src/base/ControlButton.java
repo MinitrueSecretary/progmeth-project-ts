@@ -9,7 +9,7 @@ public abstract class ControlButton extends Button {
 	
 	public ControlButton() {
 		super();
-		this.setPrefSize(150, 70);
+		this.setPrefSize(160, 70);
 		this.setButtonStyle();
 	}
 
@@ -24,11 +24,11 @@ public abstract class ControlButton extends Button {
 				+ "    -fx-background-radius: 3,2,2,2;\r\n"
 				+ "    -fx-padding: 12 30 12 30;\r\n"
 				+ "    -fx-text-fill: white;\r\n"
-				+ "    -fx-font-weight: bold;"
-				+ "    -fx-font-size: 30px;");
+				+ "	   -fx-font-family: Gill Sans;\r\n"
+				+ "    -fx-font-size: 28px;");
 	}
 	
-	//"Challenge" is too long for 30px size Text
+	//"Challenge" is too long for 28px size Text
 	public void setChallengeButtonStyle() {
 		this.setStyle("-fx-background-color: \r\n"
 				+ "        #000000,\r\n"
@@ -39,8 +39,8 @@ public abstract class ControlButton extends Button {
 				+ "    -fx-background-radius: 3,2,2,2;\r\n"
 				+ "    -fx-padding: 12 30 12 30;\r\n"
 				+ "    -fx-text-fill: white;\r\n"
-				+ "    -fx-font-weight: bold;"
-				+ "    -fx-font-size: 18px;");
+				+ "	   -fx-font-family: Gill Sans;\r\n"
+				+ "    -fx-font-size: 20px;");
 	}
 	
 	
