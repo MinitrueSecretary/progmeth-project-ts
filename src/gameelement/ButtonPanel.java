@@ -8,6 +8,7 @@ import gameelement.ctrlbutton.PeakButton;
 import gameelement.ctrlbutton.PlaceButton;
 import gameelement.ctrlbutton.RemoveButton;
 import gameelement.ctrlbutton.SwapButton;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
@@ -26,6 +27,10 @@ public class ButtonPanel extends GridPane {
 		super();
 		initializeAllButtons();
 		addButtonsToPane();
+		
+		this.setHgap(10);
+		this.setVgap(10);
+		this.setAlignment(Pos.CENTER);
 	}
 	
 	private void initializeAllButtons() {
@@ -33,7 +38,7 @@ public class ButtonPanel extends GridPane {
 		placeButton = new PlaceButton();
 		hideButton = new HideButton();
 		swapButton = new SwapButton();
-		removeButton = new RemoveButton();
+		//removeButton = new RemoveButton();
 		peakButton = new PeakButton();
 		challengeButton = new ChallengeButton();
 		boastButton = new BoastButton();
@@ -44,7 +49,7 @@ public class ButtonPanel extends GridPane {
 		this.add(placeButton, 1, 0);
 		this.add(hideButton, 2, 0);
 		this.add(swapButton, 3, 0);
-		this.add(removeButton, 0, 1);
+		//this.add(removeButton, 0, 1);
 		this.add(peakButton, 1, 1);
 		this.add(challengeButton, 2, 1);
 		this.add(boastButton, 3, 1);
@@ -67,9 +72,9 @@ public class ButtonPanel extends GridPane {
 		return swapButton;
 	}
 
-	public Button getRemoveButton() {
-		return removeButton;
-	}
+//	public Button getRemoveButton() {
+//		return removeButton;
+//	}
 
 	public Button getPeakButton() {
 		return peakButton;
@@ -83,5 +88,6 @@ public class ButtonPanel extends GridPane {
 		return boastButton;
 	}
 	
+
 	
 }

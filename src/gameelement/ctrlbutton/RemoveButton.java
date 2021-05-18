@@ -1,11 +1,12 @@
 package gameelement.ctrlbutton;
 
+import base.ControlButton;
 import gameelement.GameStage;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-public class RemoveButton extends Button {
+public class RemoveButton extends ControlButton {
 
 	public RemoveButton() {
 		this.setText("Remove");

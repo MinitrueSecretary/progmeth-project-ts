@@ -1,11 +1,12 @@
 package gameelement.ctrlbutton;
 
+import base.ControlButton;
 import gameelement.GameStage;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-public class PlaceButton extends Button {
+public class PlaceButton extends ControlButton {
 
 	public PlaceButton() {
 		this.setText("Place");

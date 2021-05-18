@@ -1,11 +1,12 @@
 package gameelement.ctrlbutton;
 
+import base.ControlButton;
 import gameelement.GameStage;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-public class PauseButton extends Button {
+public class PauseButton extends ControlButton {
 
 	public PauseButton() {
 		this.setText("Pause");
