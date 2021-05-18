@@ -26,4 +26,14 @@ public class CentralPane extends HBox {
 		
 	}
 	
+	//getters
+	public Scoreboard getScoreboard1() {
+		return scoreboard1;
+	}
+	public Scoreboard getScoreboard2() {
+		return scoreboard2;
+	}
+	public ButtonPanel getButtonpanel() {
+		return buttonpanel;
+	}
 }

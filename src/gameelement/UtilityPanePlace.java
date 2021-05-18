@@ -31,7 +31,7 @@ public class UtilityPanePlace extends VBox {
 				+ "	   Select one to place it in the PlayZone.");
 		guide.setFont(new Font("Gill Sans", 35));
 		guide.setFill(Color.WHITE);
-		UtilityPanePlace.setMargin(guide, new Insets(0,40,10,20));
+		UtilityPanePlace.setMargin(guide, new Insets(0,50,10,20));
 		this.getChildren().add(guide);
 		
 
