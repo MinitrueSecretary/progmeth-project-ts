@@ -39,7 +39,7 @@ public class Scoreboard extends VBox implements Highlightable{
 		this.setPrefHeight(250);
 		this.setPrefWidth(150);
 		this.setPadding(new Insets(10));
-		Color c1 = playernum > 1 ? Color.CRIMSON : Color.BLUEVIOLET;
+		Color c1 = playernum > 1 ? Color.DARKRED : Color.BLUEVIOLET;
 		this.setBorder(new Border(new BorderStroke(c1, BorderStrokeStyle.SOLID,  CornerRadii.EMPTY, new BorderWidths(5))));
 		
 		background0 = new Background(new BackgroundFill(Color.WHITE,null,null));

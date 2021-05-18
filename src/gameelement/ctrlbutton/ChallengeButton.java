@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 public class ChallengeButton extends ControlButton{
 	public ChallengeButton() {
 		this.setText("Challenge");
+		super.setChallengeButtonStyle();
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {@Override
 		public void handle(MouseEvent arg0) {
 			// TODO Auto-generated method stub
