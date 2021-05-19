@@ -1,16 +1,30 @@
 package base;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
-public abstract class ControlButton extends Button {
+public abstract class ControlButton extends Button implements Highlightable{
 
 	
-	
+	private Border border;
+	private Border transparentBorder;
 	
 	public ControlButton() {
 		super();
 		this.setPrefSize(160, 70);
 		this.setButtonStyle();
+		
+		this.setHover();
+		this.border = new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, new CornerRadii(2), new BorderWidths(5)));
+		this.transparentBorder = new Border(new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID, new CornerRadii(2), new BorderWidths(5)));
+		this.unhighlight();
 	}
 
 	//can be  moved to another class in the future
@@ -43,5 +57,38 @@ public abstract class ControlButton extends Button {
 				+ "    -fx-font-size: 20px;");
 	}
 	
+	public void setPrefSize(double i, double j) {
+		super.setPrefSize(i, j);
+	}
+	
+	public void setHover() {
+		this.setOnMouseEntered(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				highlight();
+				
+			}
+		});
+		
+		this.setOnMouseExited(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				unhighlight();
+			}
+	
+		});
+	}
+	@Override
+	public void highlight() {
+		this.setBorder(border);
+		
+	}
+	@Override
+	public void unhighlight() {
+		this.setBorder(transparentBorder);
+		
+	}
 	
 }
