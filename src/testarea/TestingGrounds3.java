@@ -25,7 +25,7 @@ public class TestingGrounds3 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		UtilityPaneBoast root = new UtilityPaneBoast();
+		UtilityPaneChallenge root = new UtilityPaneChallenge();
     	Scene scene = new Scene(root, 1100, 300);
 
         primaryStage.setTitle("Main Window");
