@@ -71,7 +71,7 @@ public class VictoryScene extends Scene {
 			public void handle(Event arg0) {
 				SceneManager.setScene(SceneManager.getMainMenu());
 				bgMusic.stop();
-				((MainMenuScene) SceneManager.getMainMenu()).playBGMusic();
+				MainMenuScene.playBGMusic();
 			}
 		});
 	}

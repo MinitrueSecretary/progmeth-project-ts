@@ -59,7 +59,7 @@ public class MainMenuButton extends Button implements Highlightable{
 	
 		});
 	}
-
+	@Override
 	public void highlight() {
 		this.setBorder(border);
 		

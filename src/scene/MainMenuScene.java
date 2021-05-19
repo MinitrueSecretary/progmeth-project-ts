@@ -60,7 +60,7 @@ public class MainMenuScene extends Scene {
 				//SceneManager.setScene(SceneManager.getMainGame());
 				SceneManager.setScene(SceneManager.getVictoryScene());
 				bgMusic.stop();
-				((VictoryScene) SceneManager.getVictoryScene()).playBGMusic();
+				VictoryScene.playBGMusic();
 			}
 		});
 		
