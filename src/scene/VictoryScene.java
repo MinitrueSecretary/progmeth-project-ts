@@ -1,5 +1,8 @@
 package scene;
 
+import gameelement.MainMenuButton;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,11 +22,13 @@ import javafx.scene.text.TextAlignment;
 public class VictoryScene extends Scene {
 
 	private static Text WinnerName;
+	private static MainMenuButton toMenuButton;
 	
 	public VictoryScene() {
 		super(generateRoot(), 1100, 750);
-		// TODO Auto-generated constructor stub
+		setButtonEvent();
 	}
+
 
 	private static AnchorPane generateRoot() {
 		AnchorPane root = new AnchorPane();
@@ -37,8 +42,13 @@ public class VictoryScene extends Scene {
 		hbox.setPrefWidth(1100);
 		hbox.setAlignment(Pos.CENTER);
 		
-		root.getChildren().add(hbox);
+		toMenuButton = new MainMenuButton("To Menu");
+		
+		root.getChildren().addAll(hbox,toMenuButton);
+
 		AnchorPane.setTopAnchor(hbox, 300d);
+		AnchorPane.setTopAnchor(toMenuButton, 500d);
+		AnchorPane.setLeftAnchor(toMenuButton, 550-(toMenuButton.getPrefWidth()/2));
 		return root;
 	}
 
@@ -48,4 +58,16 @@ public class VictoryScene extends Scene {
 		text.setFill(Color.WHITE);
 		return text;
 	}
+	
+	private void setButtonEvent() {
+		toMenuButton.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				SceneManager.setScene(SceneManager.getMainMenu());
+				//System.out.println("To Main Menu");
+			}
+		});
+	}
+
 }

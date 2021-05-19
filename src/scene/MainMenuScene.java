@@ -1,6 +1,8 @@
 package scene;
 
 import gameelement.MainMenuButton;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -16,11 +18,13 @@ public class MainMenuScene extends Scene {
 	private static MainMenuButton playButton;
 	private static MainMenuButton htpButton;
 	private static MainMenuButton exitButton;
+	
 	public MainMenuScene() {
 		super(generateRoot(), 1100, 750);
-		// TODO Auto-generated constructor stub
+		setButtonEvent();
 	}
-	
+
+
 	public static AnchorPane generateRoot() {
 		AnchorPane root = new AnchorPane();
 		String img_path = ClassLoader.getSystemResource("MainMenuBG.png").toString();
@@ -38,6 +42,35 @@ public class MainMenuScene extends Scene {
 		
 		return root;
 		
+	}
+	private void setButtonEvent() {
+		//TODO uncomment when mainGame is completed
+		playButton.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				//SceneManager.setScene(SceneManager.getMainGame());
+				SceneManager.setScene(SceneManager.getVictoryScene());
+			}
+		});
+		
+		htpButton.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				SceneManager.setScene(SceneManager.getHowToPlay());
+				//System.out.println("To How to play");
+			}
+		});
+		
+		exitButton.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				System.exit(0);
+	
+			}
+		});
 	}
 
 }
