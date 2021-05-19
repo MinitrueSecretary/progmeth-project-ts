@@ -14,6 +14,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -23,10 +24,14 @@ public class VictoryScene extends Scene {
 
 	private static Text WinnerName;
 	private static MainMenuButton toMenuButton;
+	private static AudioClip bgMusic;
 	
 	public VictoryScene() {
 		super(generateRoot(), 1100, 750);
 		setButtonEvent();
+		
+		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/VictoryBGM.mp3").toString());
+		bgMusic.setVolume(0.1);
 	}
 
 
@@ -65,9 +70,20 @@ public class VictoryScene extends Scene {
 			@Override
 			public void handle(Event arg0) {
 				SceneManager.setScene(SceneManager.getMainMenu());
-				//System.out.println("To Main Menu");
+				bgMusic.stop();
+				((MainMenuScene) SceneManager.getMainMenu()).playBGMusic();
 			}
 		});
+	}
+
+
+	public static void playBGMusic() {
+		bgMusic.play();
+	}
+
+
+	public static void setBgMusic(AudioClip bgMusic) {
+		VictoryScene.bgMusic = bgMusic;
 	}
 
 }

@@ -12,16 +12,24 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 
 public class MainMenuScene extends Scene {
 	private static VBox buttonBox;
 	private static MainMenuButton playButton;
 	private static MainMenuButton htpButton;
 	private static MainMenuButton exitButton;
+	private static AudioClip bgMusic;
 	
 	public MainMenuScene() {
 		super(generateRoot(), 1100, 750);
 		setButtonEvent();
+		
+		//System.out.println(ClassLoader.getSystemResource("sound/MainMenuBGM.mp3").toString());
+		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/MainMenuBGM.mp3").toString());
+		bgMusic.setVolume(0.1);
+		bgMusic.play();
+		
 	}
 
 
@@ -51,6 +59,8 @@ public class MainMenuScene extends Scene {
 			public void handle(Event arg0) {
 				//SceneManager.setScene(SceneManager.getMainGame());
 				SceneManager.setScene(SceneManager.getVictoryScene());
+				bgMusic.stop();
+				((VictoryScene) SceneManager.getVictoryScene()).playBGMusic();
 			}
 		});
 		
@@ -72,5 +82,11 @@ public class MainMenuScene extends Scene {
 			}
 		});
 	}
+
+
+	public static void playBGMusic() {
+		bgMusic.play();
+	}
+
 
 }
