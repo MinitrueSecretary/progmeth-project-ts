@@ -26,7 +26,7 @@ import logic.TurnManager;
 public class StonePlaceHolder extends Button implements Selectable {
 
 	private Stone placingStone;
-	private static boolean hidding;
+	private boolean isHidden;
 	private static Stone tempStone;
 
 	public static Stone getTempStone() {
@@ -37,12 +37,15 @@ public class StonePlaceHolder extends Button implements Selectable {
 		StonePlaceHolder.tempStone = targetStone;
 	}
 
-	public static boolean isHidding() {
-		return hidding;
+	public boolean isHidden() {
+		return isHidden;
 	}
 
-	public static void setHidding(boolean hidding) {
-		StonePlaceHolder.hidding = hidding;
+	public void setHidden(boolean hidden) {
+		this.isHidden = hidden;
+		if(this.getPlacingStone() != null) {
+			this.getPlacingStone().setHidden(hidden);
+		}
 	}
 
 	public StonePlaceHolder() {
@@ -51,15 +54,17 @@ public class StonePlaceHolder extends Button implements Selectable {
 		this.setShape(new Rectangle(100, 100));
 		this.setStyle("-fx-background-color: Yellow;\r\n -fx-border-color: Black ;\r\n"
 				+ "    -fx-border-width: 5 ; \r\n" + "    -fx-border-style: dashed ;");
+		
 		// this.setBorder(new Border(new BorderStroke(Color.BLACK,
 		// BorderStrokeStyle.DASHED, CornerRadii.EMPTY, new BorderWidths(5))));
 //		super.setDisable(true);
+		
 		super.setDisable(false);
 		this.setVisible(false);
 		this.setPrefSize(120, 120);
 		this.setPadding(new Insets(10));
 		this.setPlacingStone(null);
-		StonePlaceHolder.setHidding(false);
+		this.setHidden(false);
 		StonePlaceHolder.setTempStone(null);
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -86,7 +91,7 @@ public class StonePlaceHolder extends Button implements Selectable {
 		if (GameController.getSelectedstone() != null && GameStage.isPlacing()) {
 			this.setPlacingStone(GameController.getSelectedstone().getStone());
 			GameController.setSelectedstone(null);
-			setNewStone(this.getPlacingStone().getUrl());
+			setNewStoneImage(this.getPlacingStone().getUrl());
 			GameStage.setPlacing(false);
 			GameController.unhighlightPlayZonePlaceHolders();
 			
@@ -98,15 +103,15 @@ public class StonePlaceHolder extends Button implements Selectable {
 		
 		//hide	
 		} else if (GameStage.isHidingStage()) {
-			setNewStone("HiddenStone.png");
+			setNewStoneImage("HiddenStone.png");
 			// System.out.println(placingStone.getStone().getStoneName());
-			StonePlaceHolder.setHidding(true);
+			this.setHidden(true);
 			GameStage.setHidingStage(false);
 			TurnManager.alternateTurns();
 			
 		//peek
 		} else if (GameStage.isPeekingStage()) {
-			setNewStone(placingStone.getUrl());
+			setNewStoneImage(placingStone.getUrl());
 			//System.out.println("Peeking");
 			TurnManager.interruptClock();
 			Thread thread = new Thread(() -> {
@@ -121,7 +126,7 @@ public class StonePlaceHolder extends Button implements Selectable {
 					@Override
 					public void run() {
 
-						setNewStone("HiddenStone.png");
+						setNewStoneImage("HiddenStone.png");
 
 					}
 				});
@@ -133,28 +138,30 @@ public class StonePlaceHolder extends Button implements Selectable {
 
 			
 			//swap
-		} else if (GameStage.isSwapingStage() == true) {
+		} else if (GameStage.isSwapingStage()) {
 			// need to edit this
-			if (GameController.isReadyToSwap() == false) {
-				GameController.setStoneIndex(PlayZone.getStoneInPlay().indexOf(this));
+			if (!GameController.isReadyToSwap()) {
+				GameController.setStoneIndex1(PlayZone.getStoneInPlay().indexOf(this));
 				GameController.setReadyToSwap(true);
 				System.out.println("ready");
-			} else if (GameController.isReadyToSwap() == true) {
-				Collections.swap(PlayZone.getStoneInPlay(), GameController.getStoneIndex(),
-						PlayZone.getStoneInPlay().indexOf(this));
-				
+				this.enlarge();
+			} else {
+				GameController.setStoneIndex2(PlayZone.getStoneInPlay().indexOf(this));
+				GameController.swapStones();
 				printAllStone();
 				System.out.println("swap");
 				GameStage.setSwapingStage(false);
-				GameController.setStoneIndex(0);
 				GameController.setReadyToSwap(false);
+				TurnManager.alternateTurns();
 			}
+				
+			
 			
 			
 
 		}
 		//challenge
-		else if (GameStage.isChallengingStage() == true) {
+		else if (GameStage.isChallengingStage()) {
 			if (GameController.getGuessStone() != null && this.getPlacingStone() != null) {
 				if (GameController.getGuessStone().getStone().equals(placingStone)) {
 					// this guy get 1 score
@@ -170,31 +177,42 @@ public class StonePlaceHolder extends Button implements Selectable {
 		} 
 		
 		//boast
-		else if (GameStage.isBoastingStage() == true) {
-			if (this.placingStone != null & this.isHidding() == true && GameController.isOnShowdown() == true) {
-				this.setNewStone(this.getPlacingStone().getUrl());
-				this.setHidding(false);
+		else if (GameStage.isBoastingStage()) {
+			if (this.placingStone != null & this.isHidden() && GameController.isOnShowdown()) {
+				this.setNewStoneImage(this.getPlacingStone().getUrl());
+				this.setHidden(false);
 			}
 		}
 	}
 
-	public void setNewStone(String url) {
+	public void setNewStoneImage(String url) {
 		ImageView img = new ImageView(url);
 		img.setFitHeight(100);
 		img.setFitWidth(100);
-		StonePlaceHolder.this.setShape(new Circle());
-		StonePlaceHolder.this.setGraphic(img);
+		this.setPadding(new Insets(10));
+		this.setShape(new Circle());
+		this.setGraphic(img);
+	}
+	
+	public void enlarge() {
+		String url = this.getPlacingStone().getUrl();
+		ImageView img = new ImageView(url);
+		img.setFitHeight(120);
+		img.setFitWidth(120);
+		this.setPadding(Insets.EMPTY);
+		this.setShape(new Circle());
+		this.setGraphic(img);
 	}
 
 	public void resetSwapStone(ArrayList<StonePlaceHolder> list, int firstIndex, int secondIndex) {
-		list.get(firstIndex).setNewStone(list.get(firstIndex).getPlacingStone().getUrl());
-		list.get(secondIndex).setNewStone(list.get(secondIndex).getPlacingStone().getUrl());
+		list.get(firstIndex).setNewStoneImage(list.get(firstIndex).getPlacingStone().getUrl());
+		list.get(secondIndex).setNewStoneImage(list.get(secondIndex).getPlacingStone().getUrl());
 	}
 	
 	public void resetAllstone() {
 		for (StonePlaceHolder e : PlayZone.getStoneInPlay()) {
 			if (e.getPlacingStone() != null) {
-				e.setNewStone(e.getPlacingStone().getUrl());
+				e.setNewStoneImage(e.getPlacingStone().getUrl());
 			}
 		}
 	}

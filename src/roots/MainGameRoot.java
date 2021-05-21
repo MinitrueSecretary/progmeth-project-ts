@@ -3,6 +3,7 @@ package roots;
 import gameelement.ButtonPanel;
 import gameelement.CentralPane;
 import gameelement.PlayZone;
+import gameelement.UtilityCorrectOrWrong;
 import gameelement.UtilityPane;
 import gameelement.UtilityPaneBoast;
 import gameelement.UtilityPaneChallenge;
@@ -12,6 +13,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import logic.GameController;
 import logic.GameStage;
@@ -29,6 +31,7 @@ public class MainGameRoot extends VBox {
 	private UtilityPane peek;
 	private UtilityPaneChallenge challenge;
 	private UtilityPaneBoast boast;
+	private UtilityCorrectOrWrong correctOrWrong;
 	
 	public MainGameRoot() {
 		super();
@@ -42,6 +45,7 @@ public class MainGameRoot extends VBox {
 		peek = new UtilityPane("Peek");
 		challenge = new UtilityPaneChallenge();
 		boast = new UtilityPaneBoast();
+		correctOrWrong = new UtilityCorrectOrWrong();
 		this.getChildren().addAll(pz, cp, defaultPane);
 		
 		GameController.setPlayzone(pz);
@@ -57,13 +61,16 @@ public class MainGameRoot extends VBox {
 		Button challButton = cp.getButtonpanel().getChallengeButton();
 		Button boastButton = cp.getButtonpanel().getBoastButton();
 		Button pauseButton = cp.getButtonpanel().getPauseButton();
-
+		Button showdownButton = boast.getShowdownButton();
+		
 		pauseButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
-				setUtilPane(defaultPane);
-				cp.getButtonpanel().enableAllButtons();
+				/*setUtilPane(defaultPane);
+				cp.getButtonpanel().enableAllButtons();*/
+				
+				System.exit(0);
 				
 			}
 		});
@@ -130,6 +137,13 @@ public class MainGameRoot extends VBox {
 			}
 		});
 		
+		showdownButton.setOnMouseClicked(new EventHandler<MouseEvent>() {@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setUtilPane(correctOrWrong);
+				GameController.setOnShowdown(true);
+			}
+			});
 		
 	}
 	

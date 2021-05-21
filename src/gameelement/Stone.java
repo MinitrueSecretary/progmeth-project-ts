@@ -102,6 +102,9 @@ public class Stone {
 	}
 
 	public String getUrl() {
+		if(isHidden) {
+			return "HiddenStone.png";
+		}
 		return picURL;
 	}
 	
