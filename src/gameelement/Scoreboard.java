@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
+import logic.TurnManager;
 import base.Highlightable;
 
 public class Scoreboard extends VBox implements Highlightable{
@@ -50,15 +50,21 @@ public class Scoreboard extends VBox implements Highlightable{
 		
 		this.TIMELIMIT = 20;
 		this.SHORT_TIMELIMIT = 5;
+		
 		score = 0;
 		scoreText = new Text();
 		scoreText.setFont(new Font("Arial", 80));
 		scoreText.setText("" + score);
+		
 		Color c2 = playernum > 1 ? Color.RED : Color.BLUE;
 		Rectangle r = new Rectangle(150, 10, c2);
+		
 		setPlayernum(playernum);
 		setupTimer();
 
+		if(playernum == 1 ) {
+			highlight();
+		}
 		this.getChildren().addAll(scoreText,r,timerCanvas);
 		this.setAlignment(Pos.CENTER);
 	}
@@ -67,33 +73,42 @@ public class Scoreboard extends VBox implements Highlightable{
 	public void setupTimer() {
 		timerCanvas = new Canvas(100,50);
 		time = TIMELIMIT;
-		GraphicsContext gc =  timerCanvas.getGraphicsContext2D();
-		
-		this.timerThread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				drawCurrentTimeString(gc);
-				while(time > 0) {
-					try {
-						Thread.sleep(1000);
-						time--;
-						drawCurrentTimeString(gc);
-					} catch (InterruptedException e) {
-						// TODO edit this to change turns
-						e.printStackTrace();
-						System.out.println("Stop Timer Thread");
-						break;
-					}
-					
-				}
-				time = TIMELIMIT;
-			}
-		});
+		this.timerThread = getNewThread();
 		
 	}
 	
+	public Thread getNewThread() {
+		return new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				drawCurrentTimeString(timerCanvas.getGraphicsContext2D());
+
+				try {
+					while (time > 0) {
+						Thread.sleep(1000);
+						time--;
+						drawCurrentTimeString(timerCanvas.getGraphicsContext2D());
+					}
+				}
+
+				catch (InterruptedException e) {
+					TurnManager.alternateTurns();
+					System.out.println("Stop Timer Thread");
+					timerCanvas.getGraphicsContext2D().fillText("", timerCanvas.getWidth() / 2 - 22,
+							timerCanvas.getWidth() / 2);
+
+				}
+				finally {
+				time = TIMELIMIT;
+				TurnManager.alternateTurns();
+				}
+			}
+		});
+	}
+	
 	public void startTimer() {
+		System.out.println("Turn : Player "+playernum);
 		this.timerThread.start();
 	}
 	
@@ -130,6 +145,17 @@ public class Scoreboard extends VBox implements Highlightable{
 		this.scoreText.setText(""+this.score);
 	}
 
+	
+
+	public Thread getTimerThread() {
+		return timerThread;
+	}
+
+
+	public void restartTimerThread() {
+		this.timerThread = getNewThread();
+	}
+
 
 	@Override
 	public void highlight() {
@@ -148,5 +174,6 @@ public class Scoreboard extends VBox implements Highlightable{
 		this.setBackground(background0);
 		
 	}
+	
 	
 }

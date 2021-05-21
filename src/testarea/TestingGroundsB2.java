@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.GameStage;
+import logic.TurnManager;
 
 public class TestingGroundsB2 extends Application {
 	private PlayZone pz;
@@ -54,6 +55,7 @@ public class TestingGroundsB2 extends Application {
 		primaryStage.show();
 
 		setupButtons();
+		TurnManager.initiate();
 
 	}
 

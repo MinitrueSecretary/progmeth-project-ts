@@ -19,7 +19,8 @@ public class TestingGrounds5 extends Application{
 		Scene scene = new Scene(root, 1100, 500);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
+		bp.disableAllButtons();
+		bp.getChallengeButton().setDisable(false);
 	}
 
 	public static void main(String[] args) {

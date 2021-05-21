@@ -10,6 +10,7 @@ import gameelement.ctrlbutton.RemoveButton;
 import gameelement.ctrlbutton.SwapButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -70,6 +71,16 @@ public class ButtonPanel extends GridPane {
 		this.add(boastButton, 3, 1);
 	}
 
+	public void disableAllButtons() {
+		for(Node b:this.getChildren()) {
+			((Button)b).setDisable(true);
+		}
+	}
+	public void enableAllButtons() {
+		for(Node b:this.getChildren()) {
+			((Button)b).setDisable(false);
+		}
+	}
 	
 	public Button getPauseButton() {
 		return pauseButton;

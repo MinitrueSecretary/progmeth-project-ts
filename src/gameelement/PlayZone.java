@@ -36,7 +36,7 @@ public class PlayZone extends GridPane {
 	public void deployPlaceHolders() {
 		for (int i = 0; i < 8; i++) {
 			StonePlaceHolder c = new StonePlaceHolder();
-			System.out.println(c.toString());
+			//System.out.println(c.toString());
 			this.getStoneInPlay().add(c);
 			if (c.getPlacingStone() != null) {
 				System.out.println(c.getPlacingStone().getStoneName());

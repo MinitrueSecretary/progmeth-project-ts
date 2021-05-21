@@ -6,6 +6,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import logic.TurnManager;
 
 public class CentralPane extends HBox {
 
@@ -19,7 +20,9 @@ public class CentralPane extends HBox {
 		
 		
 		scoreboard1 = new Scoreboard(1);
+		TurnManager.setPlayer1(scoreboard1);
 		scoreboard2 = new Scoreboard(2);
+		TurnManager.setPlayer2(scoreboard2);
 		buttonpanel = new ButtonPanel();
 		this.getChildren().addAll(scoreboard1,buttonpanel,scoreboard2);
 		this.setAlignment(Pos.CENTER);
