@@ -155,24 +155,24 @@ public class StonePlaceHolder extends Button implements Selectable {
 				TurnManager.alternateTurns();
 			}
 				
-			
-			
-			
 
 		}
 		//challenge
 		else if (GameStage.isChallengingStage()) {
 			if (GameController.getGuessStone() != null && this.getPlacingStone() != null) {
+				this.setHidden(false);
+				this.setNewStoneImage();
 				if (GameController.getGuessStone().getStone().equals(placingStone)) {
 					// this guy get 1 score
 					System.out.println("correct");
-					GameStage.setChallengingStage(false);
 				} else {
 					// opponent get 1 score
 					System.out.println("wrong");
-					GameStage.setChallengingStage(false);
 				}
+				
+				TurnManager.getCurrentPlayerScoreboard().drawBlankTimeString();
 				GameStage.setChallengingStage(false);
+				TurnManager.alternateTurns();
 			}
 		} 
 		
@@ -185,6 +185,11 @@ public class StonePlaceHolder extends Button implements Selectable {
 		}
 	}
 
+	public void setNewStoneImage() {
+		String url = this.getPlacingStone().getUrl();
+		setNewStoneImage(url);
+	}
+	
 	public void setNewStoneImage(String url) {
 		ImageView img = new ImageView(url);
 		img.setFitHeight(100);

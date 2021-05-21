@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GameController;
 import logic.GameStage;
+import logic.TurnManager;
 
 public class UtilityPaneChallenge extends GridPane {
 	
@@ -40,8 +41,9 @@ public class UtilityPaneChallenge extends GridPane {
 				@Override
 				public void handle(MouseEvent arg0) {
 					// TODO Auto-generated method stub
-					if (GameStage.isChallengingStage() == true) {
+					if (GameStage.isChallengingStage()) {
 						GameController.setGuessStone(s);
+						TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 					}
 				}
 			});

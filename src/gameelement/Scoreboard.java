@@ -109,6 +109,14 @@ public class Scoreboard extends VBox implements Highlightable{
 								drawCurrentTimeString();
 							}
 						}
+						else if(GameStage.isChallengingStage()) {
+							time = TIMELIMIT;
+							while (time > 0) {
+								Thread.sleep(1000);
+								time--;
+								drawCurrentTimeStringAsterisk();
+							}
+						}
 						
 					
 						time = TIMELIMIT;
@@ -116,7 +124,10 @@ public class Scoreboard extends VBox implements Highlightable{
 					
 					}
 					catch(InterruptedException e2) {
-						
+						if(GameStage.isChallengingStage()) {
+							time = TIMELIMIT;
+							drawBlankTimeString();
+						}
 					}
 					/*try {
 						this.wait();
@@ -152,6 +163,15 @@ public class Scoreboard extends VBox implements Highlightable{
 		gc.setFont(new Font(40));
 		gc.clearRect(0, 0, this.timerCanvas.getWidth(), this.timerCanvas.getHeight());
 		String timeString = String.format("%02d", this.time);
+		gc.fillText(timeString, this.timerCanvas.getWidth() / 2 -22, this.timerCanvas.getWidth() / 2 );	
+	}
+	
+	public void drawCurrentTimeStringAsterisk(){
+		GraphicsContext gc = timerCanvas.getGraphicsContext2D();
+		gc.setFill(Color.BLACK);
+		gc.setFont(new Font(40));
+		gc.clearRect(0, 0, this.timerCanvas.getWidth(), this.timerCanvas.getHeight());
+		String timeString = String.format("%02d", this.time) + "*";
 		gc.fillText(timeString, this.timerCanvas.getWidth() / 2 -22, this.timerCanvas.getWidth() / 2 );	
 	}
 	
