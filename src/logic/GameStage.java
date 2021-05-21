@@ -5,7 +5,7 @@ public class GameStage {
 	private static boolean hidingStage;
 	private static boolean swapingStage;
 	private static boolean removingStage;
-	private static boolean peakingStage;
+	private static boolean peekingStage;
 	private static boolean challengingStage;
 	private static boolean BoastingStage;
 	private static boolean PausingStage;
@@ -34,12 +34,12 @@ public class GameStage {
 		GameStage.challengingStage = challengingStage;
 	}
 
-	public static boolean isPeakingStage() {
-		return peakingStage;
+	public static boolean isPeekingStage() {
+		return peekingStage;
 	}
 
-	public static void setPeakingStage(boolean peakingStage) {
-		GameStage.peakingStage = peakingStage;
+	public static void setPeekingStage(boolean peakingStage) {
+		GameStage.peekingStage = peakingStage;
 	}
 
 	public static boolean isRemovingStage() {

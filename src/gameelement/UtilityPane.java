@@ -60,11 +60,11 @@ public class UtilityPane extends Canvas {
 					+ "Note that swapped hidden stones will remain hidden." ;
 			gc.fillText(guide, 100, 150);
 			break;
-		case "Peak":
+		case "Peek":
 			gc.setFont(new Font("Gill Sans", 30));
-			guide = "Choose one stone to peak privately.\n"
-					+ "the other player, please close your eyes for the duration of the peak.\n"
-					+ "If you lost points in the last round, you can peak three stones." ;
+			guide = "Choose one stone to peek privately.\n"
+					+ "the other player, please close your eyes for the duration of the peek.\n"
+					+ "If you lost points in the last round, you can peek three stones." ;
 			gc.fillText(guide, 100, 150);
 			break;
 		default:

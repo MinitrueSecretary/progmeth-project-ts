@@ -1,11 +1,7 @@
 package gameelement;
-
-import javafx.geometry.Insets;
+ 
 import javafx.geometry.Pos;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import logic.TurnManager;
 
 public class CentralPane extends HBox {

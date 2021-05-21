@@ -21,8 +21,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import logic.GameController;
 import logic.GameStage;
+import logic.TurnManager;
 
-public class StonePlaceHolder extends Button implements Highlightable,Selectable {
+public class StonePlaceHolder extends Button implements Selectable {
 
 	private Stone placingStone;
 	private static boolean hidding;
@@ -58,22 +59,16 @@ public class StonePlaceHolder extends Button implements Highlightable,Selectable
 		this.setPrefSize(120, 120);
 		this.setPadding(new Insets(10));
 		this.setPlacingStone(null);
-		this.setHidding(false);
-		this.setTempStone(null);
+		StonePlaceHolder.setHidding(false);
+		StonePlaceHolder.setTempStone(null);
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				try {
-					OnclickHandler();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				OnclickHandler();
 			}
 		});
 
-		highlight();
 	}
 
 	public Stone getPlacingStone() {
@@ -84,59 +79,62 @@ public class StonePlaceHolder extends Button implements Highlightable,Selectable
 		this.placingStone = placingStone;
 	}
 
-	@Override
-	public void highlight() {
-		// TODO Auto-generated method stub
-		// super.setDisable(false);
-		this.setVisible(true);
-	}
-
-	@Override
-	public void unhighlight() {
-		// TODO Auto-generated method stub
-		super.setDisable(true);
-		this.setVisible(false);
-	}
-
-	private void OnclickHandler() throws Exception {
+	
+	private void OnclickHandler() {
+		
+		//place
 		if (GameController.getSelectedstone() != null && GameStage.isPlacing() == true) {
 			this.setPlacingStone(GameController.getSelectedstone().getStone());
 			GameController.setSelectedstone(null);
 			setNewStone(this.getPlacingStone().getUrl());
 			GameStage.setPlacing(false);
+			GameController.unhighlightPlayZonePlaceHolders();
+			
+			TurnManager.alternateTurns();
 			printAllStone();
 //			System.out.println(GameController.getSelectedstone());
 //			System.out.println(placingStone.getStone().getStoneName());
+			
+		
+		//hide	
 		} else if (GameStage.isHidingStage() == true) {
 			setNewStone("HiddenStone.png");
 			// System.out.println(placingStone.getStone().getStoneName());
-			this.setHidding(true);
+			StonePlaceHolder.setHidding(true);
 			GameStage.setHidingStage(false);
-		} else if (GameStage.isPeakingStage() == true) {
+			TurnManager.alternateTurns();
+			
+		//peek
+		} else if (GameStage.isPeekingStage() == true) {
 			setNewStone(placingStone.getUrl());
+			//System.out.println("Peeking");
+			TurnManager.interruptClock();
 			Thread thread = new Thread(() -> {
 				try {
-					Thread.sleep(5000);
+					TurnManager.getCurrentPlayerScoreboard().getTimerThread().join();
+					
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {	
-							
-							
-							setNewStone("HiddenStone.png");
 
-						}
-					});
-					
-				
-	});
-	thread.start();
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+
+						setNewStone("HiddenStone.png");
+
+					}
+				});
+				TurnManager.alternateTurns();
+				GameStage.setPeekingStage(false);
+			});
+			thread.start();
+
 
 			
-			GameStage.setPeakingStage(false);
+			
+			
+			
 		} else if (GameStage.isSwapingStage() == true) {
 			if (GameController.isReadyToSwap() == false) {
 				GameController.setStoneIndex(PlayZone.getStoneInPlay().indexOf(this));

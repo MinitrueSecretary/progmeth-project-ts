@@ -12,7 +12,7 @@ public class PeekButton extends ControlButton {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {@Override
 		public void handle(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			GameStage.setPeakingStage(true);
+			GameStage.setPeekingStage(true);
 		}
 		});
 	}

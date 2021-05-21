@@ -75,6 +75,7 @@ public class ButtonPanel extends GridPane {
 		for(Node b:this.getChildren()) {
 			((Button)b).setDisable(true);
 		}
+		pauseButton.setDisable(false);
 	}
 	public void enableAllButtons() {
 		for(Node b:this.getChildren()) {

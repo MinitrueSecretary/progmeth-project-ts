@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import logic.GameStage;
 import logic.TurnManager;
 import base.Highlightable;
 
@@ -82,27 +83,55 @@ public class Scoreboard extends VBox implements Highlightable{
 			
 			@Override
 			public void run() {
-				drawCurrentTimeString(timerCanvas.getGraphicsContext2D());
+				drawCurrentTimeString();
 
 				try {
 					while (time > 0) {
 						Thread.sleep(1000);
 						time--;
-						drawCurrentTimeString(timerCanvas.getGraphicsContext2D());
+						drawCurrentTimeString();
 					}
+					
+					time = TIMELIMIT;
+					drawBlankTimeString();
+
+					TurnManager.alternateTurns();
 				}
 
 				catch (InterruptedException e) {
-					TurnManager.alternateTurns();
+					//Interrupt from peek
+					try {
+						if(GameStage.isPeekingStage()){
+							time = SHORT_TIMELIMIT;
+							while (time > 0) {
+								Thread.sleep(1000);
+								time--;
+								drawCurrentTimeString();
+							}
+						}
+						
+					
+						time = TIMELIMIT;
+						drawBlankTimeString();
+					
+					}
+					catch(InterruptedException e2) {
+						
+					}
+					/*try {
+						this.wait();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}*/
+					
+					/*TurnManager.alternateTurns();
 					System.out.println("Stop Timer Thread");
 					timerCanvas.getGraphicsContext2D().fillText("", timerCanvas.getWidth() / 2 - 22,
-							timerCanvas.getWidth() / 2);
+							timerCanvas.getWidth() / 2);*/
 
 				}
-				finally {
-				time = TIMELIMIT;
-				TurnManager.alternateTurns();
-				}
+
 			}
 		});
 	}
@@ -117,12 +146,19 @@ public class Scoreboard extends VBox implements Highlightable{
 		this.timerThread.start();
 	}
 	
-	public void drawCurrentTimeString(GraphicsContext gc){
+	public void drawCurrentTimeString(){
+		GraphicsContext gc = timerCanvas.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		gc.setFont(new Font(40));
 		gc.clearRect(0, 0, this.timerCanvas.getWidth(), this.timerCanvas.getHeight());
 		String timeString = String.format("%02d", this.time);
 		gc.fillText(timeString, this.timerCanvas.getWidth() / 2 -22, this.timerCanvas.getWidth() / 2 );	
+	}
+	
+	public void drawBlankTimeString(){
+		GraphicsContext gc = timerCanvas.getGraphicsContext2D();
+		gc.clearRect(0, 0, this.timerCanvas.getWidth(), this.timerCanvas.getHeight());
+		
 	}
 	public int getPlayernum() {
 		return playernum;

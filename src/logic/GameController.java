@@ -76,5 +76,15 @@ public class GameController {
 	}
 	
 	
+	// Minitrue Secretary's part
+	
+	public static void highlightPlayZonePlaceHolders() {
+		playzone.highlightAllPlaceHolders();
+	}
+	
+	public static void unhighlightPlayZonePlaceHolders() {
+		playzone.unhighlightAllPlaceHolders();
+	}
+	
 	
 }

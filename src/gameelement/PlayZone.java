@@ -31,6 +31,7 @@ public class PlayZone extends GridPane {
 		this.setBackground(new Background(new BackgroundImage(img, null, null, null, null)));
 		deployPlaceHolders();
 		this.setAlignment(Pos.CENTER);
+		this.unhighlightAllPlaceHolders();
 	}
 
 	public void deployPlaceHolders() {
@@ -59,6 +60,22 @@ public class PlayZone extends GridPane {
 
 	public static void setStoneInPlay(ArrayList<StonePlaceHolder> stoneInPlay) {
 		PlayZone.stoneInPlay = stoneInPlay;
+	}
+	
+	public void highlightAllPlaceHolders() {
+		for(StonePlaceHolder s : stoneInPlay) {
+			if(s.getPlacingStone() == null) {
+				s.setVisible(true);
+			}
+		}
+	}
+	
+	public void unhighlightAllPlaceHolders() {
+		for(StonePlaceHolder s : stoneInPlay) {
+			if(s.getPlacingStone() == null) {
+				s.setVisible(false);
+			}
+		}
 	}
 
 //	public boolean placeStone(int index, StoneButton stoneButton) {

@@ -54,14 +54,18 @@ public class UtilityPanePlace extends VBox {
 					public void handle(MouseEvent arg0) {
 						if (GameStage.isPlacing() == true) {
 							GameController.setSelectedstone(e);
+							GameController.highlightPlayZonePlaceHolders();
+							
 							e.setDisable(true);
+							
 //							System.out.println(stoneList.size());
 //							System.out.println("press");
-							System.out.println(GameStage.isPlacing());
-							if(GameController.getSelectedstone() == null) {
+							//System.out.println(GameStage.isPlacing());
+							
+							/*if(GameController.getSelectedstone() == null) {
 								System.out.println("not selected");
 							} else 
-								System.out.println("selected");
+								System.out.println("selected");*/
 						}
 					};
 				});
