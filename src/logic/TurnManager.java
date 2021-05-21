@@ -5,10 +5,15 @@ import gameelement.Scoreboard;
 public class TurnManager {
 	
 	private static boolean  isGameEnd;
+	
 	private static int player1Score;
 	private static int player2Score;
 	private static Scoreboard player1;
 	private static Scoreboard player2;
+	
+	private static boolean isUpgraded1;
+	private static boolean isUpgraded2;
+	
 	private static boolean isPlayer1Turn;
 	
 	
@@ -16,6 +21,9 @@ public class TurnManager {
 		isGameEnd = false;
 		player1Score = 0;
 		player2Score = 0;
+		
+		isUpgraded1 = false;
+		isUpgraded2 = false;
 		
 		isPlayer1Turn = true;
 		player1.startTimer();
@@ -27,8 +35,10 @@ public class TurnManager {
 			if(!player1.getTimerThread().isAlive()) {
 				player1.restartTimerThread();
 			}
-			player1.highlight();
+			
 			player2.unhighlight();
+			
+			player1.highlight();
 			player1.startTimer();
 		}
 		else {
@@ -36,8 +46,31 @@ public class TurnManager {
 				player2.restartTimerThread();
 			}
 			player1.unhighlight();
+			
 			player2.highlight();
 			player2.startTimer();
+		}
+	}
+	
+	public static void continueTurn() {
+		if(isPlayer1Turn) {
+			player1.restartTimerThread();
+			player1.startTimer();
+		}
+		else {
+			player2.restartTimerThread();
+			player2.startTimer();
+		}
+	}
+	
+	public static void continueShortTurn() {
+		if(isPlayer1Turn) {
+			player1.restartTimerThread();
+			player1.startShortTimer();
+		}
+		else {
+			player2.restartTimerThread();
+			player2.startShortTimer();
 		}
 	}
 
