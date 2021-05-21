@@ -12,7 +12,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import scene.SceneManager;
+import logic.SceneManager;
+import scene.SceneManager0;
 import scene.VictoryScene;
 
 public class MainMenuRoot extends AnchorPane {
@@ -51,9 +52,9 @@ public class MainMenuRoot extends AnchorPane {
 			@Override
 			public void handle(Event arg0) {
 				//SceneManager.setScene(SceneManager.getMainGame());
-				NewSceneManager.setScene(NewSceneManager.getVictoryScene());
+				SceneManager.setScene(SceneManager.getVictoryScene());
 				bgMusic.stop();
-				((VictoryRoot) NewSceneManager.getVictorySceneR()).playBGMusic();
+				((VictoryRoot) SceneManager.getVictorySceneR()).playBGMusic();
 			}
 		});
 		
@@ -61,7 +62,7 @@ public class MainMenuRoot extends AnchorPane {
 
 			@Override
 			public void handle(Event arg0) {
-				NewSceneManager.setScene(NewSceneManager.getHowToPlay());
+				SceneManager.setScene(SceneManager.getHowToPlay());
 				//System.out.println("To How to play");
 			}
 		});

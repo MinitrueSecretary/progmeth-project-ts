@@ -18,7 +18,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import scene.SceneManager;
+import logic.SceneManager;
+import scene.SceneManager0;
 
 public class HowToPlayRoot extends VBox {
 	
@@ -109,7 +110,7 @@ public class HowToPlayRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
-				NewSceneManager.setScene(NewSceneManager.getMainMenu());
+				SceneManager.setScene(SceneManager.getMainMenu());
 				//System.out.println("To Main Menu");
 			}
 		});

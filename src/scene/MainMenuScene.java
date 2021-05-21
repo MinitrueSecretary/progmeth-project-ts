@@ -58,7 +58,7 @@ public class MainMenuScene extends Scene {
 			@Override
 			public void handle(Event arg0) {
 				//SceneManager.setScene(SceneManager.getMainGame());
-				SceneManager.setScene(SceneManager.getVictoryScene());
+				SceneManager0.setScene(SceneManager0.getVictoryScene());
 				bgMusic.stop();
 				VictoryScene.playBGMusic();
 			}
@@ -68,7 +68,7 @@ public class MainMenuScene extends Scene {
 
 			@Override
 			public void handle(Event arg0) {
-				SceneManager.setScene(SceneManager.getHowToPlay());
+				SceneManager0.setScene(SceneManager0.getHowToPlay());
 				//System.out.println("To How to play");
 			}
 		});

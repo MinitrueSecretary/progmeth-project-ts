@@ -1,4 +1,4 @@
-package gameelement;
+package logic;
 
 public class GameStage {
 	private static boolean placingStage;

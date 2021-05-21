@@ -1,4 +1,11 @@
-package gameelement;
+package logic;
+
+import gameelement.CentralPane;
+import gameelement.PlayZone;
+import gameelement.StoneButton;
+import gameelement.UtilityPane;
+import gameelement.UtilityPaneChallenge;
+import gameelement.UtilityPanePlace;
 
 public class GameController {
 	private static PlayZone playzone;

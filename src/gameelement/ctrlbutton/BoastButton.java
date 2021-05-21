@@ -2,10 +2,10 @@ package gameelement.ctrlbutton;
 
 import base.ControlButton;
 import gameelement.ButtonPanel;
-import gameelement.GameStage;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import logic.GameStage;
 
 public class BoastButton extends ControlButton{
 

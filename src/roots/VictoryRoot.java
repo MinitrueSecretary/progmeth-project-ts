@@ -16,8 +16,9 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import logic.SceneManager;
 import scene.MainMenuScene;
-import scene.SceneManager;
+import scene.SceneManager0;
 
 public class VictoryRoot extends AnchorPane {
 	
@@ -61,9 +62,9 @@ public class VictoryRoot extends AnchorPane {
 
 			@Override
 			public void handle(Event arg0) {
-				NewSceneManager.setScene(NewSceneManager.getMainMenu());
+				SceneManager.setScene(SceneManager.getMainMenu());
 				bgMusic.stop();
-				((MainMenuRoot) NewSceneManager.getMainMenuR()).playBGMusic();
+				((MainMenuRoot) SceneManager.getMainMenuR()).playBGMusic();
 			}
 		});
 	}

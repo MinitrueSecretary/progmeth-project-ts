@@ -2,7 +2,6 @@ package testarea;
 
 import gameelement.ButtonPanel;
 import gameelement.CentralPane;
-import gameelement.GameStage;
 import gameelement.PlayZone;
 import gameelement.UtilityPane;
 import gameelement.UtilityPaneBoast;
@@ -16,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.GameStage;
 
 public class TestingGroundsB2 extends Application {
 	private PlayZone pz;

@@ -29,6 +29,7 @@ public class Scoreboard extends VBox implements Highlightable{
 	private Thread timerThread;
 	private int time;
 	private final int TIMELIMIT;
+	private final int SHORT_TIMELIMIT;
 	
 	private Background background0;
 	private Background background1;
@@ -48,6 +49,7 @@ public class Scoreboard extends VBox implements Highlightable{
 		this.setBackground(background0);
 		
 		this.TIMELIMIT = 20;
+		this.SHORT_TIMELIMIT = 5;
 		score = 0;
 		scoreText = new Text();
 		scoreText.setFont(new Font("Arial", 80));
@@ -83,10 +85,20 @@ public class Scoreboard extends VBox implements Highlightable{
 						System.out.println("Stop Timer Thread");
 						break;
 					}
+					
 				}
-				
+				time = TIMELIMIT;
 			}
 		});
+		
+	}
+	
+	public void startTimer() {
+		this.timerThread.start();
+	}
+	
+	public void startShortTimer() {
+		this.time = SHORT_TIMELIMIT;
 		this.timerThread.start();
 	}
 	

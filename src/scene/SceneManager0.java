@@ -6,7 +6,7 @@ import scene.HowToPlayScene;
 import scene.MainMenuScene;
 import scene.VictoryScene;
 
-public class SceneManager {
+public class SceneManager0 {
 	private static Stage primaryStage;
 	private static Scene mainMenu;
 	private static Scene howToPlay;
@@ -23,7 +23,7 @@ public class SceneManager {
 	}
 
 	public static void setPrimaryStage(Stage primaryStage) {
-		SceneManager.primaryStage = primaryStage;
+		SceneManager0.primaryStage = primaryStage;
 	}
 	
 	public static void setScene(Scene scene) {

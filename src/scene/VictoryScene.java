@@ -69,7 +69,7 @@ public class VictoryScene extends Scene {
 
 			@Override
 			public void handle(Event arg0) {
-				SceneManager.setScene(SceneManager.getMainMenu());
+				SceneManager0.setScene(SceneManager0.getMainMenu());
 				bgMusic.stop();
 				MainMenuScene.playBGMusic();
 			}

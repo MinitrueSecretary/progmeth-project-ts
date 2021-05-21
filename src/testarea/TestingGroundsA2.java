@@ -5,17 +5,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import scene.HowToPlayScene;
 import scene.MainMenuScene;
-import scene.SceneManager;
+import scene.SceneManager0;
 import scene.VictoryScene;
 
 public class TestingGroundsA2 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		SceneManager.setPrimaryStage(primaryStage);
-		SceneManager.instantiateScenes();
+		SceneManager0.setPrimaryStage(primaryStage);
+		SceneManager0.instantiateScenes();
 		
-		Scene scene = SceneManager.getMainMenu();
+		Scene scene = SceneManager0.getMainMenu();
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();

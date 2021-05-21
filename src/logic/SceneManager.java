@@ -1,10 +1,13 @@
-package roots;
+package logic;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import roots.HowToPlayRoot;
+import roots.MainMenuRoot;
+import roots.VictoryRoot;
 
-public class NewSceneManager {
+public class SceneManager {
 	private static Parent mainMenuR;
 	private static Parent howToPlayR;
 	private static Parent mainGameR;
@@ -29,7 +32,7 @@ public class NewSceneManager {
 	}
 
 	public static void setPrimaryStage(Stage primaryStage) {
-		NewSceneManager.primaryStage = primaryStage;
+		SceneManager.primaryStage = primaryStage;
 	}
 	
 	public static void setScene(Scene scene) {

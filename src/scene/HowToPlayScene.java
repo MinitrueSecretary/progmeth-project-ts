@@ -114,7 +114,7 @@ public class HowToPlayScene extends Scene {
 
 			@Override
 			public void handle(Event arg0) {
-				SceneManager.setScene(SceneManager.getMainMenu());
+				SceneManager0.setScene(SceneManager0.getMainMenu());
 				//System.out.println("To Main Menu");
 			}
 		});
