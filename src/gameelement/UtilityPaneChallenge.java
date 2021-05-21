@@ -1,15 +1,19 @@
 package gameelement;
 
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import logic.GameController;
+import logic.GameStage;
 
 public class UtilityPaneChallenge extends GridPane {
 	
@@ -31,7 +35,17 @@ public class UtilityPaneChallenge extends GridPane {
 		
 		
 		for(int i =0; i<8;i++) {
-			StoneButton s = StoneButton.getAllStones().get(i);
+			StoneButton s = StoneButton.getAllStones().get(i);	
+			s.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					if (GameStage.isChallengingStage() == true) {
+						GameController.setGuessStone(s);
+					}
+				}
+			});
+			
 			this.add(s, i, 1);
 			Text t = new Text(s.getStone().toString());
 			t.setFont(new Font("Gill Sans", 16));

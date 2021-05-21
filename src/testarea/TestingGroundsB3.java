@@ -2,8 +2,8 @@ package testarea;
 
 import gameelement.ButtonPanel;
 import gameelement.CentralPane;
-import gameelement.GameController;
-import gameelement.GameStage;
+import logic.GameController;
+import logic.GameStage;
 import gameelement.PlayZone;
 import gameelement.UtilityCorrectOrWrong;
 import gameelement.UtilityPane;

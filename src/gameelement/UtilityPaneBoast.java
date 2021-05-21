@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
@@ -43,6 +44,13 @@ public class UtilityPaneBoast extends VBox {
 		this.getChildren().add(guide);
 		
 		yieldButton = new YieldButton();
+		yieldButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				// score+=1
+			}
+		});
 		showdownButton = new ShowdownButton();
 		stealButton = new StealButton();
 		HBox reacts = new HBox();
@@ -69,4 +77,29 @@ public class UtilityPaneBoast extends VBox {
 		});
 	}
 
+	
+	//getters and setters
+	public YieldButton getYieldButton() {
+		return yieldButton;
+	}
+
+	public void setYieldButton(YieldButton yieldButton) {
+		this.yieldButton = yieldButton;
+	}
+
+	public ShowdownButton getShowdownButton() {
+		return showdownButton;
+	}
+
+	public void setShowdownButton(ShowdownButton showdownButton) {
+		this.showdownButton = showdownButton;
+	}
+
+	public StealButton getStealButton() {
+		return stealButton;
+	}
+
+	public void setStealButton(StealButton stealButton) {
+		this.stealButton = stealButton;
+	}
 }

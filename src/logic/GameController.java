@@ -15,10 +15,27 @@ public class GameController {
 	private static UtilityPaneChallenge uitilityPaneChallenge;
 	private static StoneButton selectedstone;
 	private static StoneButton swappingStone;
+	private static StoneButton guessStone;
 	private static int stoneIndex;
 	private static boolean readyToSwap;
+	private static boolean OnShowdown;
 	
 	
+	public static boolean isOnShowdown() {
+		return OnShowdown;
+	}
+
+	public static void setOnShowdown(boolean onShowdown) {
+		OnShowdown = onShowdown;
+	}
+
+	public static StoneButton getGuessStone() {
+		return guessStone;
+	}
+
+	public static void setGuessStone(StoneButton guessStone) {
+		GameController.guessStone = guessStone;
+	}
 	
 	public static boolean isReadyToSwap() {
 		return readyToSwap;

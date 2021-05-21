@@ -23,7 +23,7 @@ public class PlayZone extends GridPane {
 
 	public PlayZone() {
 		super();
-		this.setWidth(1000);
+		this.setWidth(1100);
 		this.setHeight(200);
 		this.setPadding(new Insets(40, 10, 40, 0));
 		stoneInPlay = new ArrayList<>();
@@ -37,17 +37,13 @@ public class PlayZone extends GridPane {
 	public void deployPlaceHolders() {
 		for (int i = 0; i < 8; i++) {
 			StonePlaceHolder c = new StonePlaceHolder();
-			//System.out.println(c.toString());
-			this.getStoneInPlay().add(c);
+			// System.out.println(c.toString());
+			stoneInPlay.add(c);
 			if (c.getPlacingStone() != null) {
 				System.out.println(c.getPlacingStone().getStoneName());
 			}
-		
-//			stoneInPlay.add((StonePlaceHolder) c);
 		}
-		
-//	}
-//	public void placeStoneOnPlaceHolder() {
+
 		for (int i = 0; i < 8; i++) {
 			this.add((Node) stoneInPlay.get(i), i, 0);
 		}
