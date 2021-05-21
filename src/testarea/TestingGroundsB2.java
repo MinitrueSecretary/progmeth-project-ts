@@ -60,9 +60,14 @@ public class TestingGroundsB2 extends Application {
 	}
 
 	private void setupButtons() {
-		Button boastButton = cp.getButtonpanel().getBoastButton();
-		Button placeButtun = cp.getButtonpanel().getPlaceButton();
+		Button placeButton = cp.getButtonpanel().getPlaceButton();
+		Button hideButton = cp.getButtonpanel().getHideButton();
+		Button swapbutton =  cp.getButtonpanel().getSwapButton();
+		Button peekbutton = cp.getButtonpanel().getPeekButton();
 		Button challButton = cp.getButtonpanel().getChallengeButton();
+		Button boastButton = cp.getButtonpanel().getBoastButton();
+
+
 		
 		boastButton.setOnMouseClicked(new EventHandler<Event>() {
 
@@ -73,7 +78,7 @@ public class TestingGroundsB2 extends Application {
 			}
 		});
 
-		placeButtun.setOnMouseClicked(new EventHandler<Event>() {
+		placeButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {

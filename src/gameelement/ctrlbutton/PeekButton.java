@@ -6,9 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import logic.GameStage;
 
-public class PeakButton extends ControlButton {
-	public PeakButton() {
-		this.setText("Peak");
+public class PeekButton extends ControlButton {
+	public PeekButton() {
+		this.setText("Peek");
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {@Override
 		public void handle(MouseEvent arg0) {
 			// TODO Auto-generated method stub
