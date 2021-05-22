@@ -6,6 +6,7 @@ import gameelement.Stone;
 import gameelement.StoneButton;
 import gameelement.StonePlaceHolder;
 import gameelement.UtilityPane;
+import gameelement.UtilityPaneBoast;
 import gameelement.UtilityPaneChallenge;
 import gameelement.UtilityPanePlace;
 
@@ -15,6 +16,7 @@ public class GameController {
 	private static UtilityPane utilityPane;
 	private static UtilityPanePlace utilityPanePlace;
 	private static UtilityPaneChallenge utilityPaneChallenge;
+	private static UtilityPaneBoast utilityPaneBoast;
 	private static StoneButton selectedstone;
 	private static int stoneIndex1;
 	private static int stoneIndex2;
@@ -88,8 +90,17 @@ public class GameController {
 	public static void setUtilityPaneChallenge(UtilityPaneChallenge utilityPaneChallenge) {
 		GameController.utilityPaneChallenge = utilityPaneChallenge;
 	}
+	
 	// Minitrue Secretary's part
 	
+	public static UtilityPaneBoast getUtilityPaneBoast() {
+		return utilityPaneBoast;
+	}
+
+	public static void setUtilityPaneBoast(UtilityPaneBoast utilityPaneBoast) {
+		GameController.utilityPaneBoast = utilityPaneBoast;
+	}
+
 	public static void highlightPlayZonePlaceHolders() {
 		playzone.highlightAllPlaceHolders();
 	}
@@ -152,6 +163,11 @@ public class GameController {
 
 	public static void setBoastStolen(boolean isBoastStolen) {
 		GameController.isBoastStolen = isBoastStolen;
+		if(!isBoastStolen) {
+			utilityPaneBoast.setNotStolen();
+		}
 	}
+
+
 	
 }

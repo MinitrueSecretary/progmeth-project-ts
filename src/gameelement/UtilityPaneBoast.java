@@ -27,7 +27,7 @@ public class UtilityPaneBoast extends VBox {
 	private YieldButton yieldButton;
 	private ShowdownButton showdownButton;
 	private StealButton stealButton;
-	
+	private Text guide;
 	
 	public UtilityPaneBoast() {
 		super();
@@ -39,7 +39,7 @@ public class UtilityPaneBoast extends VBox {
 		this.setBackground(new Background(new BackgroundImage(new Image(bgpath), null, null, null, null)));
 		this.setAlignment(Pos.CENTER_LEFT);
 
-		Text guide = new Text("Boast : You claim to know all the stones in the Line.\n"
+		guide = new Text("Boast : You claim to know all the stones in the Line.\n"
 				+ "	    The other player, please react.");
 		guide.setFont(new Font("Gill Sans", 35));
 		guide.setFill(Color.WHITE);
@@ -57,9 +57,10 @@ public class UtilityPaneBoast extends VBox {
 				else {
 					TurnManager.yieldToBoast();
 				}
+				
+				GameController.setBoastStolen(false);
 				GameStage.setBoastingStage(false);
 				TurnManager.alternateTurns();
-				// score+=1
 			}
 		});
 		showdownButton = new ShowdownButton();
@@ -81,9 +82,12 @@ public class UtilityPaneBoast extends VBox {
 			//TODO add game logic to this
 			@Override
 			public void handle(Event arg0) {
+				GameController.setBoastStolen(true);
+				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 				stealButton.setDisable(true);
 				guide.setText("Boast Stolen!: The boasted also claims to know all the stones!\n"
 						+ "	    You must react, but cannot steal the boast back.");
+				
 			}
 		});
 	}
@@ -112,5 +116,14 @@ public class UtilityPaneBoast extends VBox {
 
 	public void setStealButton(StealButton stealButton) {
 		this.stealButton = stealButton;
+	}
+	
+	public void setNotStolen() {
+		
+		stealButton.setDisable(false);
+		guide.setText("Boast : You claim to know all the stones in the Line.\n"
+				+ "	    The other player, please react.");
+		
+		 new Text();
 	}
 }

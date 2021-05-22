@@ -159,25 +159,28 @@ public class Scoreboard extends VBox implements Highlightable{
 							if(GameController.isBoastStolen()) {
 								time = TIMELIMIT;
 								drawCurrentTimeString();
-								while (time > 0) {
-									try {
+								try {
+									while (time > 0) {
 										Thread.sleep(1000);
+										
+										time--;
+										drawCurrentTimeString();
 									}
-									//yield or showdown
-									catch (InterruptedException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									time--;
-									drawCurrentTimeStringAsterisk();
+									TurnManager.yieldToStolenBoast();		
+									time = TIMELIMIT;
+									drawBlankTimeString();
+									System.out.println("Boast stolen false");
+									GameController.setBoastStolen(false);
+									GameStage.setBoastingStage(false);
+									TurnManager.alternateTurns();
+								}
+								//yield or showdown
+								catch (InterruptedException e1) {
+									time = TIMELIMIT;
+									drawBlankTimeString();
 								}
 								//Time Out == Yield
-								TurnManager.yieldToStolenBoast();		
-								time = TIMELIMIT;
-								drawBlankTimeString();
 								
-								GameStage.setBoastingStage(false);
-								TurnManager.alternateTurns();
 							}
 							
 							//yield or showdown

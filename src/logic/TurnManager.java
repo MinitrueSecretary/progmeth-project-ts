@@ -101,6 +101,13 @@ public class TurnManager {
 		return player2;
 	}
 	
+	public static Scoreboard getShowdownPlayer() {
+		if(isPlayer1Turn == GameController.isBoastStolen()) {
+			return player2;
+		}
+		return player1;
+	}
+	
 	public static void answerChallenge(boolean isCorrect) {
 
 		if(isCorrect != isPlayer1Turn) {
