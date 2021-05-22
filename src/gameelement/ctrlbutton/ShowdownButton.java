@@ -1,7 +1,6 @@
 package gameelement.ctrlbutton;
 
 import base.ControlButton;
-import logic.GameController;
 import logic.GameStage;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;

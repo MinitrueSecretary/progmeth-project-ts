@@ -3,7 +3,6 @@ package roots;
 import gameelement.MainMenuButton;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;

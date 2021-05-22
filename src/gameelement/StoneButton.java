@@ -4,7 +4,6 @@ package gameelement;
 import java.util.ArrayList;
 
 import base.Highlightable;
-import base.Selectable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -17,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
-public class StoneButton extends Button implements Highlightable, Selectable{
+public class StoneButton extends Button implements Highlightable {
 	private Stone stone;
 	private final int SIZE;
 	private final int FULLSIZE;

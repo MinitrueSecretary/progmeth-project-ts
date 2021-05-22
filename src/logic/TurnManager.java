@@ -2,7 +2,6 @@ package logic;
 
 import gameelement.Scoreboard;
 import javafx.application.Platform;
-import javafx.scene.layout.VBox;
 import roots.MainGameRoot;
 
 public class TurnManager {
@@ -16,8 +15,6 @@ public class TurnManager {
 	private static Scoreboard player1;
 	private static Scoreboard player2;
 	
-	private static boolean isUpgraded1;
-	private static boolean isUpgraded2;
 	
 	private static boolean isPlayer1Turn;
 	
@@ -29,8 +26,6 @@ public class TurnManager {
 		player1Score = 0;
 		player2Score = 0;
 		
-		isUpgraded1 = false;
-		isUpgraded2 = false;
 		
 		TurnManager.gameRoot = gameRoot;
 		
@@ -108,9 +103,7 @@ public class TurnManager {
 	
 	public static void startShowdown() {
 		getCurrentPlayerScoreboard().getTimerThread().interrupt();
-		Scoreboard player;
 		if(isPlayer1Turn == GameController.isBoastStolen()) {
-			player = player2;
 			isPlayer1Turn = false;
 			player2.restartShowdownThread();
 			
@@ -119,7 +112,6 @@ public class TurnManager {
 			player2.startTimer();
 		}
 		else {
-			player = player1;
 			isPlayer1Turn = true;
 			player1.restartShowdownThread();
 			

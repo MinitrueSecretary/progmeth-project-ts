@@ -1,30 +1,21 @@
 package gameelement;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import base.Highlightable;
-import base.Selectable;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
+
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import logic.GameController;
 import logic.GameStage;
 import logic.TurnManager;
 
-public class StonePlaceHolder extends Button implements Selectable {
+public class StonePlaceHolder extends Button {
 
 	private Stone placingStone;
 	private boolean isHidden;

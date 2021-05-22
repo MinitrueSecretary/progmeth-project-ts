@@ -2,20 +2,13 @@ package gameelement;
 
 import java.util.ArrayList;
 
-import javax.management.AttributeList;
-
-import base.Selectable;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Circle;
 
 public class PlayZone extends GridPane {
 	
@@ -86,21 +79,6 @@ public class PlayZone extends GridPane {
 		
 	}
 
-//	public boolean placeStone(int index, StoneButton stoneButton) {
-//		StonePlaceHolder s = stoneInPlay.get(index);
-//		if (s.getClass() != StonePlaceHolder.class)
-//			return false;
-//		stoneInPlay.set(index, (StonePlaceHolder) stoneButton);
-//		return true;
-//	}
-//
-//	public StoneButton removeStone(int index) {
-//		StonePlaceHolder s = stoneInPlay.get(index);
-//		if (s.getClass() != StoneButton.class) {
-//			stoneInPlay.set(index, (StonePlaceHolder) new StonePlaceHolder());
-//			return (StoneButton) s;
-//		}
-//		return null;
-//	}
+
 
 }
