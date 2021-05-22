@@ -88,7 +88,7 @@ public class StonePlaceHolder extends Button implements Selectable {
 	private void OnclickHandler() {
 		
 		//place
-		if (GameController.getSelectedstone() != null && GameStage.isPlacing()) {
+		if (GameController.getSelectedstone() != null && GameStage.isPlacing() && this.getPlacingStone() == null) {
 			this.setPlacingStone(GameController.getSelectedstone().getStone());
 			GameController.setSelectedstone(null);
 			setNewStoneImage(this.getPlacingStone().getUrl());
@@ -175,7 +175,26 @@ public class StonePlaceHolder extends Button implements Selectable {
 		} 
 		
 		else if(GameStage.isShowdownStage()) {
-			
+			if (GameController.getGuessStone() != null && this.getPlacingStone() != null) {
+				this.setHidden(false);
+				this.setNewStoneImage();
+				
+				boolean isCorrect = GameController.getGuessStone().getStone().equals(placingStone);
+				System.out.println(isCorrect?"Correct!":"Incorrect!");
+				TurnManager.getCurrentPlayerScoreboard().drawBlankTimeString();
+				GameController.getUtilityPaneShowdown().disableNotHiddens();
+				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+				
+				if(!isCorrect) {
+					TurnManager.showdownFail();
+				}
+				else if(GameController.getHiddenStones().size() == 0) {
+					TurnManager.showdownComplete();
+				}
+				else {
+					TurnManager.continueShowdown();
+				}
+			}
 		}
 		
 		//boast

@@ -1,5 +1,6 @@
 package gameelement;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -76,6 +77,43 @@ public class Scoreboard extends VBox implements Highlightable{
 		timerCanvas = new Canvas(100,50);
 		time = TIMELIMIT;
 		this.timerThread = getNewThread();
+		
+	}
+	
+	public Thread getShowdownThread(){
+		return new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				drawCurrentTimeString();
+
+				try {
+					while (time > 0) {
+						Thread.sleep(1000);
+						time--;
+						drawCurrentTimeString();
+						
+
+					}
+					//tieme out
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							TurnManager.showdownFail();
+						}
+					});
+				}
+				catch(InterruptedException e) {
+					time = TIMELIMIT;
+					drawBlankTimeString();
+				}
+					
+
+				//time out
+				
+			}
+		});
 		
 	}
 	
@@ -267,6 +305,9 @@ public class Scoreboard extends VBox implements Highlightable{
 		this.timerThread = getNewThread();
 	}
 
+	public void restartShowdownThread() {
+		this.timerThread = getShowdownThread();
+	}
 
 	@Override
 	public void highlight() {

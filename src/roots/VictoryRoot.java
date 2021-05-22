@@ -34,6 +34,12 @@ public class VictoryRoot extends AnchorPane {
 				, BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT )));
 		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/VictoryBGM.mp3").toString());
 		bgMusic.setVolume(0.1);
+		
+		toMenuButton = new MainMenuButton("To Menu");
+		setButtonEvent();
+		this.getChildren().add(toMenuButton);
+		AnchorPane.setTopAnchor(toMenuButton, 500d);
+		AnchorPane.setLeftAnchor(toMenuButton, 550-(toMenuButton.getPrefWidth()/2));
 
 	}
 	public static Text getWinner() {
@@ -57,15 +63,11 @@ public class VictoryRoot extends AnchorPane {
 		HBox hbox = new HBox(WinnerName);
 		hbox.setPrefWidth(1100);
 		hbox.setAlignment(Pos.CENTER);
-		
-		toMenuButton = new MainMenuButton("To Menu");
-		setButtonEvent();
-		
-		this.getChildren().addAll(hbox,toMenuButton);
+
+		this.getChildren().add(hbox);
 
 		AnchorPane.setTopAnchor(hbox, 300d);
-		AnchorPane.setTopAnchor(toMenuButton, 500d);
-		AnchorPane.setLeftAnchor(toMenuButton, 550-(toMenuButton.getPrefWidth()/2));
+
 		
 		playBGMusic();
 		

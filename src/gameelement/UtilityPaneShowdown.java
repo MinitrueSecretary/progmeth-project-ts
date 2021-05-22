@@ -46,7 +46,6 @@ public class UtilityPaneShowdown extends GridPane{
 					if (GameStage.isShowdownStage()) {
 						GameController.setGuessStone(s);
 						disableAllButOne(s);
-						TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 					}
 				}
 			});

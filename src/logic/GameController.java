@@ -11,6 +11,7 @@ import gameelement.UtilityPane;
 import gameelement.UtilityPaneBoast;
 import gameelement.UtilityPaneChallenge;
 import gameelement.UtilityPanePlace;
+import gameelement.UtilityPaneShowdown;
 
 public class GameController {
 	private static PlayZone playzone;
@@ -19,6 +20,7 @@ public class GameController {
 	private static UtilityPanePlace utilityPanePlace;
 	private static UtilityPaneChallenge utilityPaneChallenge;
 	private static UtilityPaneBoast utilityPaneBoast;
+	private static UtilityPaneShowdown utilityPaneShowdown;
 	private static StoneButton selectedstone;
 	private static int stoneIndex1;
 	private static int stoneIndex2;
@@ -169,6 +171,19 @@ public class GameController {
 		if(!isBoastStolen) {
 			utilityPaneBoast.setNotStolen();
 		}
+	}
+
+	public static UtilityPaneShowdown getUtilityPaneShowdown() {
+		return utilityPaneShowdown;
+	}
+
+	public static void setUtilityPaneShowdown(UtilityPaneShowdown utilityPaneShowdown) {
+		GameController.utilityPaneShowdown = utilityPaneShowdown;
+	}
+
+	public static void enableUtilityPaneShowdown() {
+		utilityPaneShowdown.enableAllButtons();
+		
 	}
 
 

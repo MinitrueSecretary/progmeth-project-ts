@@ -49,6 +49,7 @@ public class MainGameRoot extends VBox {
 		showdown = new UtilityPaneShowdown();
 		this.getChildren().addAll(pz, cp, defaultPane);
 		
+		GameController.setUtilityPaneShowdown(showdown);
 		GameController.setCentralPane(cp);
 		GameController.setUtilityPaneBoast(boast);
 		GameController.setUtilityPaneChallenge(challenge);
@@ -157,6 +158,9 @@ public class MainGameRoot extends VBox {
 				showdown.disableNotHiddens();
 				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 				TurnManager.startShowdown();
+				if(GameController.getHiddenStones().size() == 0) {
+					TurnManager.showdownComplete();
+				}
 			}
 		});
 		

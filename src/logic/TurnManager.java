@@ -87,13 +87,13 @@ public class TurnManager {
 		}
 	}
 	
-	public static void continueTurn() {
+	public static void continueShowdown() {
 		if(isPlayer1Turn) {
-			player1.restartTimerThread();
+			player1.restartShowdownThread();
 			player1.startTimer();
 		}
 		else {
-			player2.restartTimerThread();
+			player2.restartShowdownThread();
 			player2.startTimer();
 		}
 	}
@@ -107,27 +107,25 @@ public class TurnManager {
 	
 	
 	public static void startShowdown() {
+		getCurrentPlayerScoreboard().getTimerThread().interrupt();
 		Scoreboard player;
-		if(isPlayer1Turn) {
-			if(GameController.isBoastStolen()) {
-				player = player2;
-				alternateTurns();
-			}
-			else {
-				player = player1;
-				continueTurn();
-			}
+		if(isPlayer1Turn == GameController.isBoastStolen()) {
+			player = player2;
+			isPlayer1Turn = false;
+			player2.restartShowdownThread();
+			
+			player1.unhighlight();
+			player2.highlight();
+			player2.startTimer();
 		}
 		else {
-			if(GameController.isBoastStolen()) {
-				player = player1;
-				alternateTurns();
-			}
-			else {
-				player = player2;
-				continueTurn();
-			}
+			player = player1;
+			isPlayer1Turn = true;
+			player1.restartShowdownThread();
 			
+			player2.unhighlight();
+			player1.highlight();
+			player1.startTimer();
 		}
 
 	}
@@ -179,6 +177,27 @@ public class TurnManager {
 			isGameEnd = true;
 			SceneManager.startGameEnd();
 		}
+	}
+	public static void showdownFail() {
+		if(isPlayer1Turn) {
+			setWinner(2);
+		}
+		else {
+			setWinner(1);
+		}
+		isGameEnd = true;
+		SceneManager.startGameEnd();
+	}
+	
+	public static void showdownComplete() {
+		if(isPlayer1Turn) {
+			setWinner(1);
+		}
+		else {
+			setWinner(2);
+		}
+		isGameEnd = true;
+		SceneManager.startGameEnd();
 	}
 	
 	public static void gameEndSequence() {
