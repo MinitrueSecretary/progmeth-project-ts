@@ -1,5 +1,6 @@
 package gameelement;
 
+import base.UtilPane;
 import exception.ButtonNotExistException;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -7,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class UtilityPane extends Canvas {
+public class UtilityPane extends Canvas implements UtilPane{
 	//this class is for non-interactive utility pane
 	private GraphicsContext gc;
 
@@ -36,8 +37,7 @@ public class UtilityPane extends Canvas {
 	}
 
 	public void drawBlankBackground() {
-		String image_path = ClassLoader.getSystemResource("UtilityPaneBlank.png").toString();
-		Image bg = new Image(image_path);
+		Image bg = UtilPane.image;
 		this.gc.drawImage(bg, 0, 0);
 	}
 

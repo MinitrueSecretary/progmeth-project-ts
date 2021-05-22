@@ -51,7 +51,7 @@ public class StonePlaceHolder extends Button {
 		correctSFX = new AudioClip(ClassLoader.getSystemResource("sound/CorrectSFX.mp3").toString());
 		correctSFX.setVolume(0.5);
 		wrongSFX = new AudioClip(ClassLoader.getSystemResource("sound/WrongSFX.mp3").toString());
-		wrongSFX.setVolume(0.5);
+		wrongSFX.setVolume(0.2);
 		this.setShape(new Rectangle(100, 100));
 		this.setStyle("-fx-background-color: Yellow;\r\n -fx-border-color: Black ;\r\n"
 				+ "    -fx-border-width: 5 ; \r\n" + "    -fx-border-style: dashed ;");

@@ -2,13 +2,11 @@ package gameelement;
 
 import java.util.ArrayList;
 
+import base.UtilPane;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,7 +15,7 @@ import javafx.scene.text.Text;
 import logic.GameController;
 import logic.GameStage;
 
-public class UtilityPanePlace extends VBox {
+public class UtilityPanePlace extends VBox implements UtilPane{
 
 	public UtilityPanePlace() {
 		super();
@@ -25,8 +23,7 @@ public class UtilityPanePlace extends VBox {
 		this.setPrefWidth(1100);
 		this.setPadding(new Insets(10));
 
-		String bgpath = ClassLoader.getSystemResource("UtilityPaneBlank.png").toString();
-		this.setBackground(new Background(new BackgroundImage(new Image(bgpath), null, null, null, null)));
+		this.setBackground(UtilPane.background);
 		this.setAlignment(Pos.CENTER_LEFT);
 
 		Text guide = new Text(

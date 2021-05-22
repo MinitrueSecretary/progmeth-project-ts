@@ -1,14 +1,12 @@
 package gameelement;
 
+import base.UtilPane;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -17,13 +15,12 @@ import logic.GameController;
 import logic.GameStage;
 import logic.TurnManager;
 
-public class UtilityPaneChallenge extends GridPane {
+public class UtilityPaneChallenge extends GridPane implements UtilPane{
 	
 	public UtilityPaneChallenge() {
 		this.setPrefHeight(300);
 		this.setPrefWidth(1100);
-		String bgpath = ClassLoader.getSystemResource("UtilityPaneBlank.png").toString();
-		this.setBackground(new Background(new BackgroundImage(new Image(bgpath), null, null, null, null)));
+		this.setBackground(UtilPane.background);
 		this.setAlignment(Pos.CENTER);
 		this.setHgap(5);
 		this.setVgap(5);
