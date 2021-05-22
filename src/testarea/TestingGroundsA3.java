@@ -8,10 +8,7 @@ import logic.SceneManager;
 import roots.HowToPlayRoot;
 import roots.MainMenuRoot;
 import roots.VictoryRoot;
-import scene.HowToPlayScene;
-import scene.MainMenuScene;
-import scene.SceneManager0;
-import scene.VictoryScene;
+
 
 public class TestingGroundsA3 extends Application {
 

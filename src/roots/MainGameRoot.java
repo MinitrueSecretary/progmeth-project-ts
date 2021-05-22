@@ -1,21 +1,19 @@
 package roots;
 
-import gameelement.ButtonPanel;
 import gameelement.CentralPane;
 import gameelement.PlayZone;
-import gameelement.UtilityCorrectOrWrong;
 import gameelement.UtilityPane;
 import gameelement.UtilityPaneBoast;
 import gameelement.UtilityPaneChallenge;
 import gameelement.UtilityPanePlace;
 import gameelement.UtilityPaneShowdown;
-import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import logic.GameController;
 import logic.GameStage;
 import logic.TurnManager;
@@ -34,6 +32,10 @@ public class MainGameRoot extends VBox {
 	private UtilityPaneBoast boast;
 	private UtilityPaneShowdown showdown;
 	
+	private static AudioClip bgMusic;
+	private static AudioClip buttonSFX;
+	private static AudioClip showdownBGM;
+	
 	public MainGameRoot() {
 		super();
 		pz = new PlayZone();
@@ -48,6 +50,14 @@ public class MainGameRoot extends VBox {
 		boast = new UtilityPaneBoast();
 		showdown = new UtilityPaneShowdown();
 		this.getChildren().addAll(pz, cp, defaultPane);
+		
+		buttonSFX = new AudioClip(ClassLoader.getSystemResource("sound/ButtonSFX.mp3").toString());
+		buttonSFX.setVolume(0.3);
+		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/GameBGM.wav").toString());
+		bgMusic.setVolume(0.1);
+		showdownBGM = new AudioClip(ClassLoader.getSystemResource("sound/ShowdownBGM.wav").toString());
+		showdownBGM.setVolume(0.1);
+		
 		
 		GameController.setUtilityPaneShowdown(showdown);
 		GameController.setCentralPane(cp);
@@ -65,20 +75,20 @@ public class MainGameRoot extends VBox {
 		Button peekbutton = cp.getButtonpanel().getPeekButton();
 		Button challButton = cp.getButtonpanel().getChallengeButton();
 		Button boastButton = cp.getButtonpanel().getBoastButton();
-		Button pauseButton = cp.getButtonpanel().getPauseButton();
+		Button cancelButton = cp.getButtonpanel().getCancelButton();
 		Button showdownButton = boast.getShowdownButton();
 		
 		cp.getButtonpanel().disablePeekAndChallenge();
 		
-		pauseButton.setOnMouseClicked(new EventHandler<Event>() {
+		cancelButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
-				/*setUtilPane(defaultPane);
-				cp.getButtonpanel().enableAllButtons();*/
-				
-				System.exit(0);
-				
+				buttonSFX.play();
+				GameStage.setAllToFalse();
+				setUtilPane(defaultPane);
+				cp.getButtonpanel().enableAllButtons();
+					
 			}
 		});
 		
@@ -86,6 +96,7 @@ public class MainGameRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 //				System.out.println("Clicked");
 				GameStage.setPlacing(true);
 				setUtilPane(place);
@@ -98,6 +109,7 @@ public class MainGameRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				GameStage.setHidingStage(true);
 				setUtilPane(hide);
 				cp.getButtonpanel().disableAllButtons();
@@ -108,6 +120,7 @@ public class MainGameRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				GameStage.setSwapingStage(true);
 				setUtilPane(swap);
 				cp.getButtonpanel().disableAllButtons();
@@ -118,6 +131,7 @@ public class MainGameRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				GameStage.setPeekingStage(true);
 				setUtilPane(peek);
 				cp.getButtonpanel().disableAllButtons();
@@ -127,6 +141,7 @@ public class MainGameRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 //				System.out.println("Clicked");
 				GameStage.setChallengingStage(true);
 				setUtilPane(challenge);
@@ -139,10 +154,12 @@ public class MainGameRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				GameController.setBoastStolen(false);
 				GameStage.setBoastingStage(true);
 				setUtilPane(boast);
 				cp.getButtonpanel().disableAllButtons();
+				cp.getButtonpanel().getCancelButton().setDisable(true);
 				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 
 			}
@@ -151,7 +168,9 @@ public class MainGameRoot extends VBox {
 		showdownButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+				buttonSFX.play();
+				bgMusic.stop();
+				showdownBGM.play();
 				GameStage.setShowdownStage(true);
 				setUtilPane(showdown);
 				cp.getButtonpanel().disableAllButtons();
@@ -166,6 +185,23 @@ public class MainGameRoot extends VBox {
 		
 	}
 	
+	public static void playBGMusic() {
+		bgMusic.play();
+	}
+	
+	public static AudioClip getBGMusic() {
+		return bgMusic;
+	}
+	
+	public static AudioClip getButtonSFX() {
+		return buttonSFX;
+	}
+
+
+	public static AudioClip getShowdownBGM() {
+		return showdownBGM;
+	}
+
 	public void setUtilPane(Node n) {
 		this.getChildren().set(2, n);
 	}

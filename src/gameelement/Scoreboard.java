@@ -96,7 +96,7 @@ public class Scoreboard extends VBox implements Highlightable{
 						
 
 					}
-					//tieme out
+					//time out
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
@@ -143,10 +143,12 @@ public class Scoreboard extends VBox implements Highlightable{
 				}
 
 				catch (InterruptedException e) {
-					//Interrupt from peek
+					
 					try {
+						//Interrupt from peek
 						if(GameStage.isPeekingStage()){
 							time = SHORT_TIMELIMIT;
+							drawCurrentTimeString();
 							while (time > 0) {
 								Thread.sleep(1000);
 								time--;

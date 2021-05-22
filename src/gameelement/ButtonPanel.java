@@ -3,10 +3,9 @@ package gameelement;
 import gameelement.ctrlbutton.BoastButton;
 import gameelement.ctrlbutton.ChallengeButton;
 import gameelement.ctrlbutton.HideButton;
-import gameelement.ctrlbutton.PauseButton;
+import gameelement.ctrlbutton.CancelButton;
 import gameelement.ctrlbutton.PeekButton;
 import gameelement.ctrlbutton.PlaceButton;
-import gameelement.ctrlbutton.RemoveButton;
 import gameelement.ctrlbutton.SwapButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,11 +24,10 @@ import logic.GameController;
 
 public class ButtonPanel extends GridPane {
 	
-	private Button pauseButton;
+	private Button cancelButton;
 	private PlaceButton placeButton;
 	private HideButton hideButton;
 	private Button swapButton;
-	private Button removeButton;
 	private Button peekButton;
 	private Button challengeButton;
 	private Button boastButton;
@@ -51,22 +49,20 @@ public class ButtonPanel extends GridPane {
 	}
 	
 	private void initializeAllButtons() {
-		pauseButton = new PauseButton();
+		cancelButton = new CancelButton();
 		placeButton = new PlaceButton();
 		hideButton = new HideButton();
 		swapButton = new SwapButton();
-		//removeButton = new RemoveButton();
 		peekButton = new PeekButton();
 		challengeButton = new ChallengeButton();
 		boastButton = new BoastButton();
 	}
 	
 	private void addButtonsToPane() {
-		this.add(pauseButton, 0, 0);
+		this.add(cancelButton, 0, 0);
 		this.add(placeButton, 1, 0);
 		this.add(hideButton, 2, 0);
 		this.add(swapButton, 3, 0);
-		//this.add(removeButton, 0, 1);
 		this.add(peekButton, 1, 1);
 		this.add(challengeButton, 2, 1);
 		this.add(boastButton, 3, 1);
@@ -76,7 +72,8 @@ public class ButtonPanel extends GridPane {
 		for(Node b:this.getChildren()) {
 			((Button)b).setDisable(true);
 		}
-		pauseButton.setDisable(false);
+		//cancel button is excluded
+		cancelButton.setDisable(false);
 	}
 	public void enableAllButtons() {
 		for(Node b:this.getChildren()) {
@@ -96,8 +93,8 @@ public class ButtonPanel extends GridPane {
 		challengeButton.setDisable(false);
 	}
 	
-	public Button getPauseButton() {
-		return pauseButton;
+	public Button getCancelButton() {
+		return cancelButton;
 	}
 
 	public Button getPlaceButton() {

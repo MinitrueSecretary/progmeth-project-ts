@@ -3,6 +3,7 @@ package roots;
 import gameelement.MainMenuButton;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -13,16 +14,16 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import logic.SceneManager;
-import scene.SceneManager0;
-import scene.VictoryScene;
+
 
 public class MainMenuRoot extends AnchorPane {
 	
-	private  VBox buttonBox;
-	private  MainMenuButton playButton;
-	private  MainMenuButton htpButton;
-	private  MainMenuButton exitButton;
-	private  AudioClip bgMusic;
+	private VBox buttonBox;
+	private MainMenuButton playButton;
+	private MainMenuButton htpButton;
+	private MainMenuButton exitButton;
+	private static AudioClip bgMusic;
+	private static AudioClip buttonSFX;
 	
 	public MainMenuRoot() {
 		super();
@@ -40,21 +41,25 @@ public class MainMenuRoot extends AnchorPane {
 		AnchorPane.setRightAnchor(buttonBox, 40d);
 		AnchorPane.setBottomAnchor(buttonBox, 80d);
 		
+		buttonSFX = new AudioClip(ClassLoader.getSystemResource("sound/ButtonSFX.mp3").toString());
+		buttonSFX.setVolume(0.3);
 		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/MainMenuBGM.mp3").toString());
 		bgMusic.setVolume(0.1);
 		bgMusic.play();
 	}
 	
 	private void setupButtonEvent() {
-		//TODO uncomment when mainGame is completed
 		playButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
-				//SceneManager.setScene(SceneManager.getMainGame());
-				SceneManager.setScene(SceneManager.getVictoryScene());
+				buttonSFX.play();
+				SceneManager.instatiateMainGame();
+				SceneManager.setScene(SceneManager.getMainGame());
 				bgMusic.stop();
-				((VictoryRoot) SceneManager.getVictorySceneR()).playBGMusic();
+				
+				MainGameRoot.playBGMusic();
+				
 			}
 		});
 		
@@ -62,6 +67,7 @@ public class MainMenuRoot extends AnchorPane {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				SceneManager.setScene(SceneManager.getHowToPlay());
 				//System.out.println("To How to play");
 			}
@@ -71,12 +77,13 @@ public class MainMenuRoot extends AnchorPane {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				System.exit(0);
 			}
 		});
 	}
 	
-	public void playBGMusic() {
+	public static void playBGMusic() {
 		bgMusic.play();
 	}
 	

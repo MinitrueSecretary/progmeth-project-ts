@@ -18,8 +18,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import logic.SceneManager;
-import scene.SceneManager0;
 
 public class HowToPlayRoot extends VBox {
 	
@@ -31,6 +31,8 @@ public class HowToPlayRoot extends VBox {
 	private MainMenuButton toMenuButton;
 	private int pageNum = 0;
 	private List<Node> children;
+	private AudioClip buttonSFX;
+	
 	public HowToPlayRoot() {
 		super();
 		this.setPrefSize(1100, 750);
@@ -52,7 +54,8 @@ public class HowToPlayRoot extends VBox {
 		pages = generatePages();
 		page = new ImageView(pages.get(0));	
 		
-		
+		buttonSFX = new AudioClip(ClassLoader.getSystemResource("sound/ButtonSFX.mp3").toString());
+		buttonSFX.setVolume(0.3);
 		this.getChildren().addAll(buttonBox,page);
 		children = this.getChildren();
 		this.setAlignment(Pos.CENTER);
@@ -76,6 +79,7 @@ public class HowToPlayRoot extends VBox {
 		
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				page = new ImageView(pages.get(--pageNum));
 				children.set(1, page);
 				if(pageNum < 5) {
@@ -93,6 +97,7 @@ public class HowToPlayRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				page = new ImageView(pages.get(++pageNum));
 				children.set(1, page);
 				if(pageNum == 5) {
@@ -110,6 +115,7 @@ public class HowToPlayRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				buttonSFX.play();
 				SceneManager.setScene(SceneManager.getMainMenu());
 				//System.out.println("To Main Menu");
 			}

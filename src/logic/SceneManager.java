@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import roots.HowToPlayRoot;
+import roots.MainGameRoot;
 import roots.MainMenuRoot;
 import roots.VictoryRoot;
 
@@ -27,10 +28,13 @@ public class SceneManager {
 		victorySceneR = new VictoryRoot();
 		mainMenu = new Scene(mainMenuR, 1100, 750);
 		howToPlay = new Scene(howToPlayR, 1100, 750);
-		//TODO instantiate this with a main game scene
 		victoryScene = new Scene(victorySceneR, 1100, 750);
 	}
 
+	public static void instatiateMainGame() {
+		mainGameR = new MainGameRoot();
+		mainGame = new Scene(mainGameR, 1100, 750);
+	}
 	public static void startGameEnd() {
 		((VictoryRoot) victorySceneR).declareWinner();
 		setScene(victoryScene);
@@ -48,8 +52,6 @@ public class SceneManager {
 	public static Stage getPrimaryStage() {
 		return primaryStage;
 	}
-	
-	
 
 	public static Scene getMainMenu() {
 		return mainMenu;

@@ -166,6 +166,7 @@ public class TurnManager {
 			setWinner(1);
 			isGameEnd = true;
 			SceneManager.startGameEnd();
+			MainGameRoot.getBGMusic().stop();
 		}
 	}
 	
@@ -176,9 +177,11 @@ public class TurnManager {
 			setWinner(2);
 			isGameEnd = true;
 			SceneManager.startGameEnd();
+			MainGameRoot.getBGMusic().stop();
 		}
 	}
 	public static void showdownFail() {
+		MainGameRoot.getShowdownBGM().stop();
 		if(isPlayer1Turn) {
 			setWinner(2);
 		}
@@ -190,6 +193,7 @@ public class TurnManager {
 	}
 	
 	public static void showdownComplete() {
+		MainGameRoot.getShowdownBGM().stop();
 		if(isPlayer1Turn) {
 			setWinner(1);
 		}

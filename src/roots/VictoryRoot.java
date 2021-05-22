@@ -18,14 +18,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.SceneManager;
 import logic.TurnManager;
-import scene.MainMenuScene;
-import scene.SceneManager0;
 
 public class VictoryRoot extends AnchorPane {
 	
 	private Text WinnerName;
-	private MainMenuButton toMenuButton;
-	private AudioClip bgMusic;
+	private MainMenuButton exitButton;
+	private static AudioClip bgMusic;
 	
 	public VictoryRoot() {
 		super();
@@ -35,11 +33,11 @@ public class VictoryRoot extends AnchorPane {
 		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/VictoryBGM.mp3").toString());
 		bgMusic.setVolume(0.1);
 		
-		toMenuButton = new MainMenuButton("To Menu");
+		exitButton = new MainMenuButton("Exit");
 		setButtonEvent();
-		this.getChildren().add(toMenuButton);
-		AnchorPane.setTopAnchor(toMenuButton, 500d);
-		AnchorPane.setLeftAnchor(toMenuButton, 550-(toMenuButton.getPrefWidth()/2));
+		this.getChildren().add(exitButton);
+		AnchorPane.setTopAnchor(exitButton, 500d);
+		AnchorPane.setLeftAnchor(exitButton, 550-(exitButton.getPrefWidth()/2));
 
 	}
 	public static Text getWinner() {
@@ -74,19 +72,20 @@ public class VictoryRoot extends AnchorPane {
 	}
 	
 	private void setButtonEvent() {
-		toMenuButton.setOnMouseClicked(new EventHandler<Event>() {
+		exitButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
-				SceneManager.setScene(SceneManager.getMainMenu());
+				
 				bgMusic.stop();
-				((MainMenuRoot) SceneManager.getMainMenuR()).playBGMusic();
+				System.exit(0);
+				
 			}
 		});
 	}
 
 
-	public void playBGMusic() {
+	public static void playBGMusic() {
 		bgMusic.play();
 	}
 

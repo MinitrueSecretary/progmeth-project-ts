@@ -15,6 +15,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -28,6 +29,8 @@ public class UtilityPaneBoast extends VBox {
 	private ShowdownButton showdownButton;
 	private StealButton stealButton;
 	private Text guide;
+	private AudioClip buttonSFX;
+	
 	
 	public UtilityPaneBoast() {
 		super();
@@ -46,10 +49,14 @@ public class UtilityPaneBoast extends VBox {
 		UtilityPanePlace.setMargin(guide, new Insets(0,50,10,20));
 		this.getChildren().add(guide);
 		
+		buttonSFX = new AudioClip(ClassLoader.getSystemResource("sound/ButtonSFX.mp3").toString());
+		buttonSFX.setVolume(0.3);
 		yieldButton = new YieldButton();
 		yieldButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
+
+				buttonSFX.play();
 				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 				if(GameController.isBoastStolen()) {
 					TurnManager.yieldToStolenBoast();
@@ -82,6 +89,8 @@ public class UtilityPaneBoast extends VBox {
 			//TODO add game logic to this
 			@Override
 			public void handle(Event arg0) {
+
+				buttonSFX.play();
 				GameController.setBoastStolen(true);
 				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 				stealButton.setDisable(true);

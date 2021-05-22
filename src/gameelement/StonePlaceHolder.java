@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +29,9 @@ public class StonePlaceHolder extends Button implements Selectable {
 	private Stone placingStone;
 	private boolean isHidden;
 	private static Stone tempStone;
+	private static AudioClip stoneSFX;
+	private static AudioClip correctSFX;
+	private static AudioClip wrongSFX;
 
 	public static Stone getTempStone() {
 		return tempStone;
@@ -50,7 +54,13 @@ public class StonePlaceHolder extends Button implements Selectable {
 
 	public StonePlaceHolder() {
 		super();
-
+		stoneSFX = new AudioClip(ClassLoader.getSystemResource("sound/StoneSFX.mp3").toString());
+		stoneSFX.setVolume(0.3);
+		
+		correctSFX = new AudioClip(ClassLoader.getSystemResource("sound/CorrectSFX.mp3").toString());
+		correctSFX.setVolume(0.5);
+		wrongSFX = new AudioClip(ClassLoader.getSystemResource("sound/WrongSFX.mp3").toString());
+		wrongSFX.setVolume(0.5);
 		this.setShape(new Rectangle(100, 100));
 		this.setStyle("-fx-background-color: Yellow;\r\n -fx-border-color: Black ;\r\n"
 				+ "    -fx-border-width: 5 ; \r\n" + "    -fx-border-style: dashed ;");
@@ -94,9 +104,9 @@ public class StonePlaceHolder extends Button implements Selectable {
 			setNewStoneImage(this.getPlacingStone().getUrl());
 			GameStage.setPlacing(false);
 			GameController.unhighlightPlayZonePlaceHolders();
-			
+			stoneSFX.play();
 			TurnManager.alternateTurns();
-			printAllStone();
+			//printAllStone();
 //			System.out.println(GameController.getSelectedstone());
 //			System.out.println(placingStone.getStone().getStoneName());
 			
@@ -105,12 +115,14 @@ public class StonePlaceHolder extends Button implements Selectable {
 		} else if (GameStage.isHidingStage()) {
 			setNewStoneImage("HiddenStone.png");
 			// System.out.println(placingStone.getStone().getStoneName());
+			stoneSFX.play();
 			this.setHidden(true);
 			GameStage.setHidingStage(false);
 			TurnManager.alternateTurns();
 			
 		//peek
 		} else if (GameStage.isPeekingStage()) {
+			this.setHidden(false);
 			setNewStoneImage(placingStone.getUrl());
 			//System.out.println("Peeking");
 			TurnManager.interruptClock();
@@ -130,6 +142,7 @@ public class StonePlaceHolder extends Button implements Selectable {
 
 					}
 				});
+				this.setHidden(true);
 				TurnManager.alternateTurns();
 				GameStage.setPeekingStage(false);
 			});
@@ -146,9 +159,10 @@ public class StonePlaceHolder extends Button implements Selectable {
 				System.out.println("ready");
 				this.enlarge();
 			} else {
+				stoneSFX.play();
 				GameController.setStoneIndex2(PlayZone.getStoneInPlay().indexOf(this));
 				GameController.swapStones();
-				printAllStone();
+				//printAllStone();
 				System.out.println("swap");
 				GameStage.setSwapingStage(false);
 				GameController.setReadyToSwap(false);
@@ -166,6 +180,12 @@ public class StonePlaceHolder extends Button implements Selectable {
 				boolean isCorrect = GameController.getGuessStone().getStone().equals(placingStone);
 				TurnManager.answerChallenge(isCorrect);
 				System.out.println(isCorrect?"Correct!":"Incorrect!");
+				if(isCorrect) {
+					correctSFX.play();
+				}
+				else {
+					wrongSFX.play();
+				}
 				TurnManager.getCurrentPlayerScoreboard().drawBlankTimeString();
 				
 				GameController.enableUtilityPaneChallenge();
@@ -174,11 +194,11 @@ public class StonePlaceHolder extends Button implements Selectable {
 			}
 		} 
 		
+		//showdown
 		else if(GameStage.isShowdownStage()) {
 			if (GameController.getGuessStone() != null && this.getPlacingStone() != null) {
 				this.setHidden(false);
 				this.setNewStoneImage();
-				
 				boolean isCorrect = GameController.getGuessStone().getStone().equals(placingStone);
 				System.out.println(isCorrect?"Correct!":"Incorrect!");
 				TurnManager.getCurrentPlayerScoreboard().drawBlankTimeString();
@@ -186,24 +206,20 @@ public class StonePlaceHolder extends Button implements Selectable {
 				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 				
 				if(!isCorrect) {
+					wrongSFX.play();
 					TurnManager.showdownFail();
 				}
 				else if(GameController.getHiddenStones().size() == 0) {
 					TurnManager.showdownComplete();
 				}
 				else {
+					correctSFX.play();
 					TurnManager.continueShowdown();
 				}
 			}
 		}
 		
-		//boast
-		/*else if (GameStage.isBoastingStage()) {
-			if (this.placingStone != null & this.isHidden() && GameController.isOnShowdown()) {
-				this.setNewStoneImage(this.getPlacingStone().getUrl());
-				this.setHidden(false);
-			}
-		}*/
+
 	}
 
 	public void setNewStoneImage() {
