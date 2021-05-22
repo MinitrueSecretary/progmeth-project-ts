@@ -111,7 +111,23 @@ public class TurnManager {
 		}
 	}
 	
-	
+   public static void yieldToBoast() {
+	   if(isPlayer1Turn) {
+		   addScoreToPlayer1();
+	   }
+	   else {
+		   addScoreToPlayer2();
+	   }
+   }
+   
+   public static void yieldToStolenBoast() {
+	   if(isPlayer1Turn) {
+		   addScoreToPlayer2();
+	   }
+	   else {
+		   addScoreToPlayer1();
+	   }
+   }
 	
 	public static void addScoreToPlayer1() {
 		player1Score++;

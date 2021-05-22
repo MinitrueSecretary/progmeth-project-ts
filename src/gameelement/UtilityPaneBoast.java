@@ -18,6 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import logic.GameController;
+import logic.GameStage;
+import logic.TurnManager;
 
 public class UtilityPaneBoast extends VBox {
 
@@ -47,7 +50,15 @@ public class UtilityPaneBoast extends VBox {
 		yieldButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+				if(GameController.isBoastStolen()) {
+					TurnManager.yieldToStolenBoast();
+				}
+				else {
+					TurnManager.yieldToBoast();
+				}
+				GameStage.setBoastingStage(false);
+				TurnManager.alternateTurns();
 				// score+=1
 			}
 		});

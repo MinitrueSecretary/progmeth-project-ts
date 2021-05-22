@@ -16,13 +16,12 @@ public class GameController {
 	private static UtilityPanePlace utilityPanePlace;
 	private static UtilityPaneChallenge utilityPaneChallenge;
 	private static StoneButton selectedstone;
-	private static StoneButton swappingStone1;
-	private static StoneButton swappingStone2;
 	private static int stoneIndex1;
 	private static int stoneIndex2;
 	private static StoneButton guessStone;
 	
 	private static boolean readyToSwap;
+	private static boolean isBoastStolen;
 	private static boolean OnShowdown;
 	
 	
@@ -146,4 +145,13 @@ public class GameController {
 	public static void enableUtilityPaneChallenge() {
 		utilityPaneChallenge.enableAllButtons();
 	}
+
+	public static boolean isBoastStolen() {
+		return isBoastStolen;
+	}
+
+	public static void setBoastStolen(boolean isBoastStolen) {
+		GameController.isBoastStolen = isBoastStolen;
+	}
+	
 }

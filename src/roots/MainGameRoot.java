@@ -132,9 +132,12 @@ public class MainGameRoot extends VBox {
 
 			@Override
 			public void handle(Event arg0) {
+				GameController.setBoastStolen(false);
 				GameStage.setBoastingStage(true);
 				setUtilPane(boast);
 				cp.getButtonpanel().disableAllButtons();
+				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+
 			}
 		});
 		

@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import logic.GameController;
 import logic.GameStage;
 import logic.TurnManager;
 import base.Highlightable;
@@ -94,7 +95,7 @@ public class Scoreboard extends VBox implements Highlightable{
 					
 					time = TIMELIMIT;
 					drawBlankTimeString();
-
+					//time out
 					TurnManager.alternateTurns();
 				}
 
@@ -108,7 +109,10 @@ public class Scoreboard extends VBox implements Highlightable{
 								time--;
 								drawCurrentTimeString();
 							}
+							
+						//alternate turns is written in another thread
 						}
+						//Interrupt from Challenge
 						else if(GameStage.isChallengingStage()) {
 							time = TIMELIMIT;
 							drawCurrentTimeStringAsterisk();
@@ -119,6 +123,24 @@ public class Scoreboard extends VBox implements Highlightable{
 							}
 							//Time Out == Wrong Answer
 							TurnManager.answerChallenge(false);
+							GameStage.setChallengingStage(false);
+							TurnManager.alternateTurns();
+						}
+						
+						//First Boast
+						else if(GameStage.isBoastingStage()) {
+							System.out.println("Boast");
+							time = TIMELIMIT;
+							drawCurrentTimeStringAsterisk();
+							while (time > 0) {
+								Thread.sleep(1000);
+								time--;
+								drawCurrentTimeStringAsterisk();
+							}
+							//Time Out == Yield
+							TurnManager.yieldToBoast();
+							GameStage.setBoastingStage(false);
+							TurnManager.alternateTurns();
 						}
 						
 					
@@ -131,11 +153,42 @@ public class Scoreboard extends VBox implements Highlightable{
 							time = TIMELIMIT;
 							drawBlankTimeString();
 						}
+						
+						else if(GameStage.isBoastingStage()) {
+							//Boast Stolen
+							if(GameController.isBoastStolen()) {
+								time = TIMELIMIT;
+								drawCurrentTimeString();
+								while (time > 0) {
+									try {
+										Thread.sleep(1000);
+									}
+									//yield or showdown
+									catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									time--;
+									drawCurrentTimeStringAsterisk();
+								}
+								//Time Out == Yield
+								TurnManager.yieldToStolenBoast();		
+								time = TIMELIMIT;
+								drawBlankTimeString();
+								
+								GameStage.setBoastingStage(false);
+								TurnManager.alternateTurns();
+							}
+							
+							//yield or showdown
+							else {
+								time = TIMELIMIT;
+								drawBlankTimeString();
+							}
+						}				
+						
 					}
-					finally {
-						time = TIMELIMIT;
-						drawBlankTimeString();
-					}
+					
 					/*try {
 						this.wait();
 					} catch (InterruptedException e1) {
