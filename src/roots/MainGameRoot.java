@@ -53,7 +53,7 @@ public class MainGameRoot extends VBox {
 		
 		buttonSFX = new AudioClip(ClassLoader.getSystemResource("sound/ButtonSFX.mp3").toString());
 		buttonSFX.setVolume(0.3);
-		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/GameBGM.wav").toString());
+		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/GameBGM.mp3").toString());
 		bgMusic.setVolume(0.1);
 		showdownBGM = new AudioClip(ClassLoader.getSystemResource("sound/ShowdownBGM.wav").toString());
 		showdownBGM.setVolume(0.1);

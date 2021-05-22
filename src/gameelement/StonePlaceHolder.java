@@ -179,6 +179,7 @@ public class StonePlaceHolder extends Button {
 				}
 				TurnManager.getCurrentPlayerScoreboard().drawBlankTimeString();
 				
+				GameController.setGuessStone(null);
 				GameController.enableUtilityPaneChallenge();
 				GameStage.setChallengingStage(false);
 				TurnManager.alternateTurns();

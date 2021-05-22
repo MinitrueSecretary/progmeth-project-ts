@@ -40,9 +40,11 @@ public class UtilityPaneChallenge extends GridPane implements UtilPane{
 				public void handle(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 					if (GameStage.isChallengingStage()) {
-						GameController.setGuessStone(s);
-						disableAllButOne(s);
-						TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+						if(GameController.getGuessStone() == null) {
+							disableAllButOne(s);
+							GameController.setGuessStone(s);
+							TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+						}
 					}
 				}
 			});
