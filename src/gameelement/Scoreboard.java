@@ -111,11 +111,14 @@ public class Scoreboard extends VBox implements Highlightable{
 						}
 						else if(GameStage.isChallengingStage()) {
 							time = TIMELIMIT;
+							drawCurrentTimeStringAsterisk();
 							while (time > 0) {
 								Thread.sleep(1000);
 								time--;
 								drawCurrentTimeStringAsterisk();
 							}
+							//Time Out == Wrong Answer
+							TurnManager.answerChallenge(false);
 						}
 						
 					
@@ -128,6 +131,10 @@ public class Scoreboard extends VBox implements Highlightable{
 							time = TIMELIMIT;
 							drawBlankTimeString();
 						}
+					}
+					finally {
+						time = TIMELIMIT;
+						drawBlankTimeString();
 					}
 					/*try {
 						this.wait();

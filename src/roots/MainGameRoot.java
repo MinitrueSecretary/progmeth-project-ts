@@ -48,6 +48,7 @@ public class MainGameRoot extends VBox {
 		correctOrWrong = new UtilityCorrectOrWrong();
 		this.getChildren().addAll(pz, cp, defaultPane);
 		
+		GameController.setUtilityPaneChallenge(challenge);
 		GameController.setPlayzone(pz);
 		setupButtons();
 		TurnManager.initiate(this);

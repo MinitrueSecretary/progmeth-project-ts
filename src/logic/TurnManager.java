@@ -101,14 +101,28 @@ public class TurnManager {
 		return player2;
 	}
 	
+	public static void answerChallenge(boolean isCorrect) {
+
+		if(isCorrect != isPlayer1Turn) {
+			addScoreToPlayer1();
+		}
+		else {
+			addScoreToPlayer2();
+		}
+	}
+	
+	
+	
 	public static void addScoreToPlayer1() {
 		player1Score++;
 		player1.setScore(player1Score);
+		isUpgraded2 = true;
 	}
 	
 	public static void addScoreToPlayer2() {
 		player2Score++;
 		player2.setScore(player2Score);
+		isUpgraded1 = true;
 	}
 	
 	

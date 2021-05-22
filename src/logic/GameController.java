@@ -12,9 +12,9 @@ import gameelement.UtilityPanePlace;
 public class GameController {
 	private static PlayZone playzone;
 	private static CentralPane centralPane;
-	private static UtilityPane uitilityPane;
-	private static UtilityPanePlace uitilityPanePlace;
-	private static UtilityPaneChallenge uitilityPaneChallenge;
+	private static UtilityPane utilityPane;
+	private static UtilityPanePlace utilityPanePlace;
+	private static UtilityPaneChallenge utilityPaneChallenge;
 	private static StoneButton selectedstone;
 	private static StoneButton swappingStone1;
 	private static StoneButton swappingStone2;
@@ -64,26 +64,31 @@ public class GameController {
 	public static void setCentralPane(CentralPane centralPane) {
 		GameController.centralPane = centralPane;
 	}
-	public static UtilityPane getUitilityPane() {
-		return uitilityPane;
-	}
-	public static void setUitilityPane(UtilityPane uitilityPane) {
-		GameController.uitilityPane = uitilityPane;
-	}
-	public static UtilityPanePlace getUitilityPanePlace() {
-		return uitilityPanePlace;
-	}
-	public static void setUitilityPanePlace(UtilityPanePlace uitilityPanePlace) {
-		GameController.uitilityPanePlace = uitilityPanePlace;
-	}
-	public static UtilityPaneChallenge getUitilityPaneChallenge() {
-		return uitilityPaneChallenge;
-	}
-	public static void setUitilityPaneChallenge(UtilityPaneChallenge uitilityPaneChallenge) {
-		GameController.uitilityPaneChallenge = uitilityPaneChallenge;
-	}
 	
 	
+	public static UtilityPane getUtilityPane() {
+		return utilityPane;
+	}
+
+	public static void setUtilityPane(UtilityPane utilityPane) {
+		GameController.utilityPane = utilityPane;
+	}
+
+	public static UtilityPanePlace getUtilityPanePlace() {
+		return utilityPanePlace;
+	}
+
+	public static void setUtilityPanePlace(UtilityPanePlace utilityPanePlace) {
+		GameController.utilityPanePlace = utilityPanePlace;
+	}
+
+	public static UtilityPaneChallenge getUtilityPaneChallenge() {
+		return utilityPaneChallenge;
+	}
+
+	public static void setUtilityPaneChallenge(UtilityPaneChallenge utilityPaneChallenge) {
+		GameController.utilityPaneChallenge = utilityPaneChallenge;
+	}
 	// Minitrue Secretary's part
 	
 	public static void highlightPlayZonePlaceHolders() {
@@ -132,5 +137,13 @@ public class GameController {
 		
 		placeHolder2.setNewStoneImage(stone1.getUrl());
 		placeHolder2.setPlacingStone(stone1);
+	}
+	
+	public static void disableUtilityPaneChallenge(StoneButton excluded) {
+		utilityPaneChallenge.disableAllButOne(excluded);
+	}
+
+	public static void enableUtilityPaneChallenge() {
+		utilityPaneChallenge.enableAllButtons();
 	}
 }

@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -43,6 +44,7 @@ public class UtilityPaneChallenge extends GridPane {
 					// TODO Auto-generated method stub
 					if (GameStage.isChallengingStage()) {
 						GameController.setGuessStone(s);
+						disableAllButOne(s);
 						TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 					}
 				}
@@ -60,5 +62,33 @@ public class UtilityPaneChallenge extends GridPane {
 			
 		}
 		
+	}
+	
+	public void unhighlightAllButtons() {
+		for(Node n : this.getChildren()) {
+			if(n.getClass() == StoneButton.class) {
+				((StoneButton)n).unhighlight();
+			}
+		}
+	}
+	public void disableAllButOne(StoneButton excluded) {
+		for(Node n : this.getChildren()) {
+			if(n.getClass() == StoneButton.class) {
+				((StoneButton)n).setDisable(true);
+				
+				if(((StoneButton)n).equals(excluded)) {
+					((StoneButton)n).setDisable(false);
+				}
+			}
+			
+
+		}
+	}
+	public void enableAllButtons() {
+		for(Node n : this.getChildren()) {
+			if(n.getClass() == StoneButton.class) {
+				((StoneButton)n).setDisable(false);
+			}
+		}
 	}
 }

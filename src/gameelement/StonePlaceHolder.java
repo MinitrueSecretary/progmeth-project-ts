@@ -162,15 +162,13 @@ public class StonePlaceHolder extends Button implements Selectable {
 			if (GameController.getGuessStone() != null && this.getPlacingStone() != null) {
 				this.setHidden(false);
 				this.setNewStoneImage();
-				if (GameController.getGuessStone().getStone().equals(placingStone)) {
-					// this guy get 1 score
-					System.out.println("correct");
-				} else {
-					// opponent get 1 score
-					System.out.println("wrong");
-				}
 				
+				boolean isCorrect = GameController.getGuessStone().getStone().equals(placingStone);
+				TurnManager.answerChallenge(isCorrect);
+				System.out.println(isCorrect?"Correct!":"Incorrect!");
 				TurnManager.getCurrentPlayerScoreboard().drawBlankTimeString();
+				
+				GameController.enableUtilityPaneChallenge();
 				GameStage.setChallengingStage(false);
 				TurnManager.alternateTurns();
 			}
