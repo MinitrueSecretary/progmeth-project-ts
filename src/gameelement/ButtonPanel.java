@@ -21,6 +21,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import logic.GameController;
 
 public class ButtonPanel extends GridPane {
 	
@@ -81,6 +82,18 @@ public class ButtonPanel extends GridPane {
 		for(Node b:this.getChildren()) {
 			((Button)b).setDisable(false);
 		}
+		if(GameController.getHiddenStones().size() == 0) {
+			disablePeekAndChallenge();
+		}
+	}
+	
+	public void disablePeekAndChallenge() {
+		peekButton.setDisable(true);
+		challengeButton.setDisable(true);
+	}
+	public void enablePeekAndChallenge() {
+		peekButton.setDisable(false);
+		challengeButton.setDisable(false);
 	}
 	
 	public Button getPauseButton() {

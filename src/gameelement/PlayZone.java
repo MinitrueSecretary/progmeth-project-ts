@@ -73,6 +73,18 @@ public class PlayZone extends GridPane {
 			}
 		}
 	}
+	
+	public ArrayList<Stone> getHiddenStones(){
+		ArrayList<Stone> list = new ArrayList<>();
+		for(StonePlaceHolder s: stoneInPlay) {
+			if(s.isHidden()) {
+				list.add(s.getPlacingStone());
+			}
+		}
+		
+		return list;
+		
+	}
 
 //	public boolean placeStone(int index, StoneButton stoneButton) {
 //		StonePlaceHolder s = stoneInPlay.get(index);

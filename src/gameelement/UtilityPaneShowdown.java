@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -28,12 +29,12 @@ public class UtilityPaneShowdown extends GridPane{
 		this.setHgap(5);
 		this.setVgap(5);
 		this.setPadding(new Insets(10));
-		Text guide = new Text("Challenge : Select one of the stones below.\n"
-				+ "		   The other player shall find it in the PlayZone.");
+		Text guide = new Text("SHOWDOWN! : Match the stones below with the ones above.\n"
+				+ "		   Get it all right, you win. If not, you lose.");
 		guide.setFont(new Font("Gill Sans", 35));
 		guide.setFill(Color.WHITE);
 		this.add(guide, 0, 0, 8, 1);
-		//TODO only hidden stones' buttons should be enabled.
+		
 		
 		
 		for(int i =0; i<8;i++) {
@@ -42,9 +43,9 @@ public class UtilityPaneShowdown extends GridPane{
 				@Override
 				public void handle(MouseEvent arg0) {
 					// TODO Auto-generated method stub
-					if (GameStage.isChallengingStage()) {
+					if (GameStage.isShowdownStage()) {
 						GameController.setGuessStone(s);
-						//disableAllButOne(s);
+						disableAllButOne(s);
 						TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 					}
 				}
@@ -59,6 +60,48 @@ public class UtilityPaneShowdown extends GridPane{
 			GridPane.setHalignment(t,HPos.CENTER);
 			
 		this.setAlignment(Pos.CENTER);
+		}
+	}
+
+	public void unhighlightAllButtons() {
+		for(Node n : this.getChildren()) {
+			if(n.getClass() == StoneButton.class) {
+				((StoneButton)n).unhighlight();
+			}
+		}
+	}
+	public void disableAllButOne(StoneButton excluded) {
+		for(Node n : this.getChildren()) {
+			if(n.getClass() == StoneButton.class) {
+				((StoneButton)n).setDisable(true);
+				
+				if(((StoneButton)n).equals(excluded)) {
+					((StoneButton)n).setDisable(false);
+				}
+			}
+			
+
+		}
+	}
+	public void enableAllButtons() {
+		for(Node n : this.getChildren()) {
+			if(n.getClass() == StoneButton.class) {
+				((StoneButton)n).setDisable(false);
+			}
+		}
+	}
+	
+	public void disableNotHiddens() {
+		for(Node n : this.getChildren()) {
+			if(n.getClass() == StoneButton.class) {
+				StoneButton s = (StoneButton) n;
+				if(GameController.getHiddenStones().contains(s.getStone())) {
+					s.setDisable(false);
+				}
+				else {
+					s.setDisable(true);
+				}
+			}
 		}
 	}
 

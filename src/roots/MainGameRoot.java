@@ -8,6 +8,7 @@ import gameelement.UtilityPane;
 import gameelement.UtilityPaneBoast;
 import gameelement.UtilityPaneChallenge;
 import gameelement.UtilityPanePlace;
+import gameelement.UtilityPaneShowdown;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -31,7 +32,7 @@ public class MainGameRoot extends VBox {
 	private UtilityPane peek;
 	private UtilityPaneChallenge challenge;
 	private UtilityPaneBoast boast;
-	private UtilityCorrectOrWrong correctOrWrong;
+	private UtilityPaneShowdown showdown;
 	
 	public MainGameRoot() {
 		super();
@@ -45,9 +46,10 @@ public class MainGameRoot extends VBox {
 		peek = new UtilityPane("Peek");
 		challenge = new UtilityPaneChallenge();
 		boast = new UtilityPaneBoast();
-		correctOrWrong = new UtilityCorrectOrWrong();
+		showdown = new UtilityPaneShowdown();
 		this.getChildren().addAll(pz, cp, defaultPane);
 		
+		GameController.setCentralPane(cp);
 		GameController.setUtilityPaneBoast(boast);
 		GameController.setUtilityPaneChallenge(challenge);
 		GameController.setPlayzone(pz);
@@ -64,6 +66,8 @@ public class MainGameRoot extends VBox {
 		Button boastButton = cp.getButtonpanel().getBoastButton();
 		Button pauseButton = cp.getButtonpanel().getPauseButton();
 		Button showdownButton = boast.getShowdownButton();
+		
+		cp.getButtonpanel().disablePeekAndChallenge();
 		
 		pauseButton.setOnMouseClicked(new EventHandler<Event>() {
 
@@ -126,6 +130,7 @@ public class MainGameRoot extends VBox {
 				GameStage.setChallengingStage(true);
 				setUtilPane(challenge);
 				cp.getButtonpanel().disableAllButtons();
+				challenge.disableNotHiddens();
 			}
 		});
 		
@@ -142,13 +147,18 @@ public class MainGameRoot extends VBox {
 			}
 		});
 		
-		showdownButton.setOnMouseClicked(new EventHandler<MouseEvent>() {@Override
+		showdownButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				setUtilPane(correctOrWrong);
-				GameController.setOnShowdown(true);
+				GameStage.setShowdownStage(true);
+				setUtilPane(showdown);
+				cp.getButtonpanel().disableAllButtons();
+				showdown.disableNotHiddens();
+				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+				TurnManager.startShowdown();
 			}
-			});
+		});
 		
 	}
 	
@@ -163,8 +173,6 @@ public class MainGameRoot extends VBox {
 	public void enableCPButtons() {
 		cp.getButtonpanel().enableAllButtons();
 	}
-	
-	
 
 
 }

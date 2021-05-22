@@ -96,7 +96,12 @@ public class Scoreboard extends VBox implements Highlightable{
 					time = TIMELIMIT;
 					drawBlankTimeString();
 					//time out
-					TurnManager.alternateTurns();
+					if(!GameStage.isShowdownStage()) {
+						TurnManager.alternateTurns();
+					}
+					else {
+						//showdown player lose
+					}
 				}
 
 				catch (InterruptedException e) {
@@ -142,11 +147,10 @@ public class Scoreboard extends VBox implements Highlightable{
 							GameStage.setBoastingStage(false);
 							TurnManager.alternateTurns();
 						}
-						
 					
 						time = TIMELIMIT;
 						drawBlankTimeString();
-					
+						
 					}
 					catch(InterruptedException e2) {
 						if(GameStage.isChallengingStage()) {
@@ -192,18 +196,6 @@ public class Scoreboard extends VBox implements Highlightable{
 						
 					}
 					
-					/*try {
-						this.wait();
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}*/
-					
-					/*TurnManager.alternateTurns();
-					System.out.println("Stop Timer Thread");
-					timerCanvas.getGraphicsContext2D().fillText("", timerCanvas.getWidth() / 2 - 22,
-							timerCanvas.getWidth() / 2);*/
-
 				}
 
 			}

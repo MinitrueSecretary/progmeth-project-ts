@@ -2,6 +2,7 @@ package gameelement.ctrlbutton;
 
 import base.ControlButton;
 import logic.GameController;
+import logic.GameStage;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -17,7 +18,7 @@ public class ShowdownButton extends ControlButton {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				GameController.setOnShowdown(true);
+				GameStage.setShowdownStage(true);
 			}
 		});
 	}

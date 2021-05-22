@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.GameController;
 import logic.GameStage;
+import logic.SceneManager;
 import logic.TurnManager;
 import roots.MainGameRoot;
 
@@ -26,7 +27,10 @@ public class TestingGroundsB2 extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		
 		MainGameRoot root = new MainGameRoot();
+		SceneManager.instantiateScenes();
+		SceneManager.setPrimaryStage(primaryStage);
 		Scene scene = new Scene(root, 1100, 750);
 		primaryStage.setScene(scene);
 		primaryStage.show();

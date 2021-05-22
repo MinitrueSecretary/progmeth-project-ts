@@ -73,7 +73,7 @@ public class TestingGroundsB3 extends Application {
 		public void handle(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			root.getChildren().set(2, correctOrWrong);
-			GameController.setOnShowdown(true);
+			//GameController.setOnShowdown(true);
 		}
 		});
 		

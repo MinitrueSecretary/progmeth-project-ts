@@ -7,23 +7,45 @@ public class GameStage {
 	private static boolean removingStage;
 	private static boolean peekingStage;
 	private static boolean challengingStage;
-	private static boolean BoastingStage;
-	private static boolean PausingStage;
+	private static boolean boastingStage;
+	private static boolean pausingStage;
+	
+	private static boolean showdownStage;
+
+	public static void setAllToFalse() {
+		placingStage = false;
+		hidingStage = false;
+		swapingStage = false;
+		removingStage = false;
+		peekingStage = false;
+		challengingStage = false;
+		boastingStage = false;
+		pausingStage = false;
+		showdownStage = false;
+	}
+
+	public static boolean isShowdownStage() {
+		return showdownStage;
+	}
+
+	public static void setShowdownStage(boolean showdownStage) {
+		GameStage.showdownStage = showdownStage;
+	}
 
 	public static boolean isPausingStage() {
-		return PausingStage;
+		return pausingStage;
 	}
 
 	public static void setPausingStage(boolean pausingStage) {
-		PausingStage = pausingStage;
+		GameStage.pausingStage = pausingStage;
 	}
 
 	public static boolean isBoastingStage() {
-		return BoastingStage;
+		return boastingStage;
 	}
 
 	public static void setBoastingStage(boolean boastingStage) {
-		BoastingStage = boastingStage;
+		GameStage.boastingStage = boastingStage;
 	}
 
 	public static boolean isChallengingStage() {

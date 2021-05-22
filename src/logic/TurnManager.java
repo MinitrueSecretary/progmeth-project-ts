@@ -9,6 +9,8 @@ public class TurnManager {
 	
 	private static boolean  isGameEnd;
 	
+	private static int winner; // 1 if player1, 2 if player2
+	
 	private static int player1Score;
 	private static int player2Score;
 	private static Scoreboard player1;
@@ -47,15 +49,17 @@ public class TurnManager {
 	
 	public static void alternateTurns() {
 		
-		//enable the Buttons again
-		gameRoot.enableCPButtons();
-		
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				gameRoot.setUtilPane();	
-			}
-		});
+		if(!GameStage.isShowdownStage()) {
+			//enable the Buttons again
+			gameRoot.enableCPButtons();
+			
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					gameRoot.setUtilPane();	
+				}
+			});
+		}
 		
 		isPlayer1Turn = !isPlayer1Turn;
 		if(isPlayer1Turn) {
@@ -101,12 +105,33 @@ public class TurnManager {
 		return player2;
 	}
 	
-	public static Scoreboard getShowdownPlayer() {
-		if(isPlayer1Turn == GameController.isBoastStolen()) {
-			return player2;
+	
+	public static void startShowdown() {
+		Scoreboard player;
+		if(isPlayer1Turn) {
+			if(GameController.isBoastStolen()) {
+				player = player2;
+				alternateTurns();
+			}
+			else {
+				player = player1;
+				continueTurn();
+			}
 		}
-		return player1;
+		else {
+			if(GameController.isBoastStolen()) {
+				player = player1;
+				alternateTurns();
+			}
+			else {
+				player = player2;
+				continueTurn();
+			}
+			
+		}
+
 	}
+	
 	
 	public static void answerChallenge(boolean isCorrect) {
 
@@ -139,17 +164,31 @@ public class TurnManager {
 	public static void addScoreToPlayer1() {
 		player1Score++;
 		player1.setScore(player1Score);
-		isUpgraded2 = true;
+		if(player1Score >= 3) {
+			setWinner(1);
+			isGameEnd = true;
+			SceneManager.startGameEnd();
+		}
 	}
 	
 	public static void addScoreToPlayer2() {
 		player2Score++;
 		player2.setScore(player2Score);
-		isUpgraded1 = true;
+		if(player2Score >= 3) {
+			setWinner(2);
+			isGameEnd = true;
+			SceneManager.startGameEnd();
+		}
 	}
 	
+	public static void gameEndSequence() {
+		GameStage.setAllToFalse();
+		getCurrentPlayerScoreboard().getTimerThread().interrupt();
+		SceneManager.startGameEnd();
+	}
 	
 	//getters and setters
+
 	public static boolean isGameEnd() {
 		return isGameEnd;
 	}
@@ -157,7 +196,8 @@ public class TurnManager {
 	public static void setGameEnd(boolean isGameEnd) {
 		TurnManager.isGameEnd = isGameEnd;
 	}
-
+	
+	
 	public static int getPlayer1Score() {
 		return player1Score;
 	}
@@ -186,6 +226,16 @@ public class TurnManager {
 
 	public static boolean isPlayer1Turn() {
 		return isPlayer1Turn;
+	}
+
+	public static int getWinner() {
+		return winner;
+	}
+
+	public static void setWinner(int winner) {
+		if(winner > 2) winner = 2;
+		if(winner < 1) winner = 1;
+		TurnManager.winner = winner;
 	}
 
 

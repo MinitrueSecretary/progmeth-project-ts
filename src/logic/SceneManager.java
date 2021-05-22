@@ -31,6 +31,12 @@ public class SceneManager {
 		victoryScene = new Scene(victorySceneR, 1100, 750);
 	}
 
+	public static void startGameEnd() {
+		((VictoryRoot) victorySceneR).declareWinner();
+		setScene(victoryScene);
+		
+	}
+	
 	public static void setPrimaryStage(Stage primaryStage) {
 		SceneManager.primaryStage = primaryStage;
 	}
@@ -43,7 +49,7 @@ public class SceneManager {
 		return primaryStage;
 	}
 	
-
+	
 
 	public static Scene getMainMenu() {
 		return mainMenu;
@@ -77,5 +83,5 @@ public class SceneManager {
 		return victorySceneR;
 	}
 	
-	
+
 }

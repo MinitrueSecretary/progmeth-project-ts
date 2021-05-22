@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.SceneManager;
+import logic.TurnManager;
 import scene.MainMenuScene;
 import scene.SceneManager0;
 
@@ -31,7 +32,26 @@ public class VictoryRoot extends AnchorPane {
 		String img_path = ClassLoader.getSystemResource("VictoryScreen.png").toString();
 		this.setBackground(new Background(new BackgroundImage(new Image(img_path), BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT 
 				, BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT )));
-		
+		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/VictoryBGM.mp3").toString());
+		bgMusic.setVolume(0.1);
+
+	}
+	public static Text getWinner() {
+		String winner;
+		if(TurnManager.getWinner() == 1) {
+			winner = "Player 1";
+		}
+		else {
+			winner = "Player 2";
+		}
+		Text text =  new Text(winner);
+		text.setFont(new Font("Century",100));
+		text.setFill(Color.WHITE);
+		return text;
+	}
+	
+	public void declareWinner() {
+
 		WinnerName = getWinner();
 		
 		HBox hbox = new HBox(WinnerName);
@@ -47,14 +67,8 @@ public class VictoryRoot extends AnchorPane {
 		AnchorPane.setTopAnchor(toMenuButton, 500d);
 		AnchorPane.setLeftAnchor(toMenuButton, 550-(toMenuButton.getPrefWidth()/2));
 		
-		bgMusic = new AudioClip(ClassLoader.getSystemResource("sound/VictoryBGM.mp3").toString());
-		bgMusic.setVolume(0.1);
-	}
-	public static Text getWinner() {
-		Text text =  new Text("Player 1");
-		text.setFont(new Font("Century",100));
-		text.setFill(Color.WHITE);
-		return text;
+		playBGMusic();
+		
 	}
 	
 	private void setButtonEvent() {

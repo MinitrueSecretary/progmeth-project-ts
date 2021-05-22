@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.ArrayList;
+
 import gameelement.CentralPane;
 import gameelement.PlayZone;
 import gameelement.Stone;
@@ -24,15 +26,11 @@ public class GameController {
 	
 	private static boolean readyToSwap;
 	private static boolean isBoastStolen;
-	private static boolean OnShowdown;
 	
 	
-	public static boolean isOnShowdown() {
-		return OnShowdown;
-	}
-
-	public static void setOnShowdown(boolean onShowdown) {
-		OnShowdown = onShowdown;
+	
+	public static ArrayList<Stone> getHiddenStones(){
+		return playzone.getHiddenStones();
 	}
 
 	public static StoneButton getGuessStone() {
@@ -142,11 +140,16 @@ public class GameController {
 		Stone stone1 = placeHolder1.getPlacingStone();
 		Stone stone2 = placeHolder2.getPlacingStone();
 		
+		boolean b1 = placeHolder1.isHidden();
+		boolean b2 = placeHolder2.isHidden();
+		
 		placeHolder1.setNewStoneImage(stone2.getUrl());
 		placeHolder1.setPlacingStone(stone2);
+		placeHolder1.setHidden(b2);
 		
 		placeHolder2.setNewStoneImage(stone1.getUrl());
 		placeHolder2.setPlacingStone(stone1);
+		placeHolder2.setHidden(b1);
 	}
 	
 	public static void disableUtilityPaneChallenge(StoneButton excluded) {

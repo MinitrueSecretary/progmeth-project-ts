@@ -33,7 +33,7 @@ public class UtilityPaneChallenge extends GridPane {
 		guide.setFont(new Font("Gill Sans", 35));
 		guide.setFill(Color.WHITE);
 		this.add(guide, 0, 0, 8, 1);
-		//TODO only hidden stones' buttons should be enabled.
+
 		
 		
 		for(int i =0; i<8;i++) {
@@ -88,6 +88,20 @@ public class UtilityPaneChallenge extends GridPane {
 		for(Node n : this.getChildren()) {
 			if(n.getClass() == StoneButton.class) {
 				((StoneButton)n).setDisable(false);
+			}
+		}
+	}
+	
+	public void disableNotHiddens() {
+		for(Node n : this.getChildren()) {
+			if(n.getClass() == StoneButton.class) {
+				StoneButton s = (StoneButton) n;
+				if(GameController.getHiddenStones().contains(s.getStone())) {
+					s.setDisable(false);
+				}
+				else {
+					s.setDisable(true);
+				}
 			}
 		}
 	}

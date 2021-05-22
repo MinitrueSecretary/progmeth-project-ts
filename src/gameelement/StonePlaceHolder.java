@@ -174,13 +174,17 @@ public class StonePlaceHolder extends Button implements Selectable {
 			}
 		} 
 		
+		else if(GameStage.isShowdownStage()) {
+			
+		}
+		
 		//boast
-		else if (GameStage.isBoastingStage()) {
+		/*else if (GameStage.isBoastingStage()) {
 			if (this.placingStone != null & this.isHidden() && GameController.isOnShowdown()) {
 				this.setNewStoneImage(this.getPlacingStone().getUrl());
 				this.setHidden(false);
 			}
-		}
+		}*/
 	}
 
 	public void setNewStoneImage() {
