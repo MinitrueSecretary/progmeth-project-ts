@@ -1,12 +1,5 @@
 package gameelement;
 
-import gameelement.ctrlbutton.BoastButton;
-import gameelement.ctrlbutton.ChallengeButton;
-import gameelement.ctrlbutton.HideButton;
-import gameelement.ctrlbutton.CancelButton;
-import gameelement.ctrlbutton.PeekButton;
-import gameelement.ctrlbutton.PlaceButton;
-import gameelement.ctrlbutton.SwapButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -25,8 +18,8 @@ import logic.GameController;
 public class ButtonPanel extends GridPane {
 	
 	private Button cancelButton;
-	private PlaceButton placeButton;
-	private HideButton hideButton;
+	private Button placeButton;
+	private Button hideButton;
 	private Button swapButton;
 	private Button peekButton;
 	private Button challengeButton;
@@ -49,13 +42,14 @@ public class ButtonPanel extends GridPane {
 	}
 	
 	private void initializeAllButtons() {
-		cancelButton = new CancelButton();
-		placeButton = new PlaceButton();
-		hideButton = new HideButton();
-		swapButton = new SwapButton();
-		peekButton = new PeekButton();
-		challengeButton = new ChallengeButton();
-		boastButton = new BoastButton();
+		cancelButton = new ControlButton("Cancel");
+		placeButton = new ControlButton("Place");
+		hideButton = new ControlButton("Hide");
+		swapButton = new ControlButton("Swap");
+		peekButton = new ControlButton("Peek");
+		challengeButton = new ControlButton("Challenge");
+		((ControlButton)challengeButton).setButtonStyleSmallFont();
+		boastButton = new ControlButton("Boast");
 	}
 	
 	private void addButtonsToPane() {
@@ -101,7 +95,7 @@ public class ButtonPanel extends GridPane {
 		return placeButton;
 	}
 
-	public HideButton getHideButton() {
+	public Button getHideButton() {
 		return hideButton;
 	}
 

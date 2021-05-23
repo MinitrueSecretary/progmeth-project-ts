@@ -9,6 +9,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,9 +23,9 @@ import logic.TurnManager;
 
 public class UtilityPaneBoast extends VBox implements UtilPane{
 
-	private YieldButton yieldButton;
-	private ShowdownButton showdownButton;
-	private StealButton stealButton;
+	private Button yieldButton;
+	private Button showdownButton;
+	private Button stealButton;
 	private Text guide;
 	private AudioClip buttonSFX;
 	
@@ -47,13 +48,13 @@ public class UtilityPaneBoast extends VBox implements UtilPane{
 		
 		buttonSFX = new AudioClip(ClassLoader.getSystemResource("sound/ButtonSFX.mp3").toString());
 		buttonSFX.setVolume(0.3);
-		yieldButton = new YieldButton();
+		yieldButton = new ControlButton("Yield");
 		yieldButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
 
 				buttonSFX.play();
-				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+				TurnManager.interruptClock();
 				if(GameController.isBoastStolen()) {
 					TurnManager.yieldToStolenBoast();
 				}
@@ -66,8 +67,9 @@ public class UtilityPaneBoast extends VBox implements UtilPane{
 				TurnManager.alternateTurns();
 			}
 		});
-		showdownButton = new ShowdownButton();
-		stealButton = new StealButton();
+		showdownButton = new ControlButton("Showdown");
+		((ControlButton)showdownButton).setButtonStyleSmallFont();
+		stealButton = new ControlButton("Steal");
 		HBox reacts = new HBox();
 		reacts.setPadding(new Insets(10));
 		reacts.setAlignment(Pos.CENTER);
@@ -88,7 +90,7 @@ public class UtilityPaneBoast extends VBox implements UtilPane{
 
 				buttonSFX.play();
 				GameController.setBoastStolen(true);
-				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+				TurnManager.interruptClock();
 				stealButton.setDisable(true);
 				guide.setText("Boast Stolen!: The boasted also claims to know all the stones!\n"
 						+ "	    You must react, but cannot steal the boast back.");
@@ -99,7 +101,7 @@ public class UtilityPaneBoast extends VBox implements UtilPane{
 
 	
 	//getters and setters
-	public YieldButton getYieldButton() {
+	public Button getYieldButton() {
 		return yieldButton;
 	}
 
@@ -107,7 +109,7 @@ public class UtilityPaneBoast extends VBox implements UtilPane{
 		this.yieldButton = yieldButton;
 	}
 
-	public ShowdownButton getShowdownButton() {
+	public Button getShowdownButton() {
 		return showdownButton;
 	}
 
@@ -115,7 +117,7 @@ public class UtilityPaneBoast extends VBox implements UtilPane{
 		this.showdownButton = showdownButton;
 	}
 
-	public StealButton getStealButton() {
+	public Button getStealButton() {
 		return stealButton;
 	}
 
