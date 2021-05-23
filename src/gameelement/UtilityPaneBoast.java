@@ -2,9 +2,6 @@ package gameelement;
 
 
 import base.UtilPane;
-import gameelement.ctrlbutton.ShowdownButton;
-import gameelement.ctrlbutton.StealButton;
-import gameelement.ctrlbutton.YieldButton;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -105,32 +102,22 @@ public class UtilityPaneBoast extends VBox implements UtilPane{
 		return yieldButton;
 	}
 
-	public void setYieldButton(YieldButton yieldButton) {
-		this.yieldButton = yieldButton;
-	}
 
 	public Button getShowdownButton() {
 		return showdownButton;
 	}
 
-	public void setShowdownButton(ShowdownButton showdownButton) {
-		this.showdownButton = showdownButton;
-	}
+
 
 	public Button getStealButton() {
 		return stealButton;
 	}
 
-	public void setStealButton(StealButton stealButton) {
-		this.stealButton = stealButton;
-	}
-	
+
 	public void setNotStolen() {
 		
 		stealButton.setDisable(false);
 		guide.setText("Boast : You claim to know all the stones in the Line.\n"
 				+ "	    The other player, please react.");
-		
-		 new Text();
 	}
 }
