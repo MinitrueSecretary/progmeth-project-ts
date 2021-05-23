@@ -103,7 +103,6 @@ public class ButtonPanel extends GridPane {
 		return swapButton;
 	}
 
-
 	public Button getPeekButton() {
 		return peekButton;
 	}

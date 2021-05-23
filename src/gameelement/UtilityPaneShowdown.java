@@ -54,17 +54,9 @@ public class UtilityPaneShowdown extends GridPane implements UtilPane{
 			GridPane.setHalignment(s,HPos.CENTER);
 			GridPane.setHalignment(t,HPos.CENTER);
 			
-		this.setAlignment(Pos.CENTER);
 		}
 	}
 
-	public void unhighlightAllButtons() {
-		for(Node n : this.getChildren()) {
-			if(n.getClass() == StoneButton.class) {
-				((StoneButton)n).unhighlight();
-			}
-		}
-	}
 	public void disableAllButOne(StoneButton excluded) {
 		for(Node n : this.getChildren()) {
 			if(n.getClass() == StoneButton.class) {

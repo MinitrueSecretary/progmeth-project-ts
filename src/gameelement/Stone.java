@@ -5,14 +5,11 @@ public class Stone {
 	private String stoneName;
 	private String picURL;
 	private boolean isHidden;
-	private boolean isInPlay;
-	private int position;
 	
 	
 	public Stone(String stoneName) {
 		setStoneName(stoneName);
 		isHidden = false;
-		isInPlay = false;
 	}
 
 
@@ -29,42 +26,35 @@ public class Stone {
 		switch (stoneName.toLowerCase().trim()) {
 		case "chip":
 			picURL = "Chip.png";
-			position = 0;
 			break;
 		case "aircraft":
 			picURL = "Aircraft.png";
-			position = 1;
 			break;
 		case "factory":
 			picURL = "Factory.png";
-			position = 2;
 			break;
 		case "flask":
 			picURL = "Flask.png";
-			position = 3;
 			break;
 		case "gear":
 			picURL = "Gear.png";
-			position = 4;
 			break;
 		case "lightbulb":
 			picURL = "Lightbulb.png";
-			position = 5;
 			break;
 		case "hardhat":
 			picURL = "HardHat.png";
-			position = 6;
 			break;
 		case "car":
 			picURL = "Car.png";
-			position = 7;
+
 			break;
 		default:
 			System.out.println("Such stone type is not in this variation of Tellstones.");
 			System.out.println("Stone type automatically set to \"The Chip\".");
 			stoneName = "Chip";
 			picURL = "Chip.png";
-			position = 0;
+
 		}
 		this.stoneName = stoneName;
 	}
@@ -118,26 +108,5 @@ public class Stone {
 	}
 
 
-	public int getPosition() {
-		return position;
-	}
-
-
-	public void setPosition(int position) {
-		if(position > 7 || position < 0) {
-			position = 0;
-		}
-		this.position = position;
-	}
-
-
-	public boolean isInPlay() {
-		return isInPlay;
-	}
-
-
-	public void setInPlay(boolean isInPlay) {
-		this.isInPlay = isInPlay;
-	}
 	
 }

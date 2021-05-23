@@ -16,7 +16,7 @@ public class Main extends Application {
 		
 		Scene scene = SceneManager.getMainMenu();
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Tellstones : Intiania's Game Time");
+		primaryStage.setTitle("Tellstones : Intania's Game Time");
 		primaryStage.setResizable(false);
 		primaryStage.show();
 

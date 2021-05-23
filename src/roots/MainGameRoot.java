@@ -174,8 +174,8 @@ public class MainGameRoot extends VBox {
 				GameStage.setShowdownStage(true);
 				setUtilPane(showdown);
 				cp.getButtonpanel().disableAllButtons();
+				cp.getButtonpanel().getCancelButton().setDisable(true);
 				showdown.disableNotHiddens();
-				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
 				TurnManager.startShowdown();
 				if(GameController.getHiddenStones().size() == 0) {
 					TurnManager.showdownComplete();

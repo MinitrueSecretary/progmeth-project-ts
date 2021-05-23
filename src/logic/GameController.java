@@ -7,7 +7,6 @@ import gameelement.PlayZone;
 import gameelement.Stone;
 import gameelement.StoneButton;
 import gameelement.StonePlaceHolder;
-import gameelement.UtilityPane;
 import gameelement.UtilityPaneBoast;
 import gameelement.UtilityPaneChallenge;
 import gameelement.UtilityPanePlace;
@@ -16,7 +15,6 @@ import gameelement.UtilityPaneShowdown;
 public class GameController {
 	private static PlayZone playzone;
 	private static CentralPane centralPane;
-	private static UtilityPane utilityPane;
 	private static UtilityPanePlace utilityPanePlace;
 	private static UtilityPaneChallenge utilityPaneChallenge;
 	private static UtilityPaneBoast utilityPaneBoast;
@@ -42,7 +40,6 @@ public class GameController {
 	public static void setGuessStone(StoneButton guessStone) {
 		GameController.guessStone = guessStone;
 	}
-	
 
 	
 	public static StoneButton getSelectedstone() {
@@ -66,14 +63,6 @@ public class GameController {
 		GameController.centralPane = centralPane;
 	}
 	
-	
-	public static UtilityPane getUtilityPane() {
-		return utilityPane;
-	}
-
-	public static void setUtilityPane(UtilityPane utilityPane) {
-		GameController.utilityPane = utilityPane;
-	}
 
 	public static UtilityPanePlace getUtilityPanePlace() {
 		return utilityPanePlace;
@@ -91,7 +80,7 @@ public class GameController {
 		GameController.utilityPaneChallenge = utilityPaneChallenge;
 	}
 	
-	// Minitrue Secretary's part
+
 	
 	public static UtilityPaneBoast getUtilityPaneBoast() {
 		return utilityPaneBoast;
@@ -108,8 +97,6 @@ public class GameController {
 	public static void unhighlightPlayZonePlaceHolders() {
 		playzone.unhighlightAllPlaceHolders();
 	}
-
-	
 	
 	public static boolean isReadyToSwap() {
 		return readyToSwap;
@@ -181,11 +168,4 @@ public class GameController {
 		GameController.utilityPaneShowdown = utilityPaneShowdown;
 	}
 
-	public static void enableUtilityPaneShowdown() {
-		utilityPaneShowdown.enableAllButtons();
-		
-	}
-
-
-	
 }

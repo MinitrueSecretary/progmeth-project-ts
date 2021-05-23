@@ -43,7 +43,7 @@ public class UtilityPaneChallenge extends GridPane implements UtilPane{
 						if(GameController.getGuessStone() == null) {
 							disableAllButOne(s);
 							GameController.setGuessStone(s);
-							TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+							TurnManager.interruptClock();
 						}
 					}
 				}
@@ -57,19 +57,12 @@ public class UtilityPaneChallenge extends GridPane implements UtilPane{
 			UtilityPaneChallenge.setHalignment(s,HPos.CENTER);
 			UtilityPaneChallenge.setHalignment(t,HPos.CENTER);
 			
-		this.setAlignment(Pos.CENTER);
 			
 		}
 		
 	}
 	
-	public void unhighlightAllButtons() {
-		for(Node n : this.getChildren()) {
-			if(n.getClass() == StoneButton.class) {
-				((StoneButton)n).unhighlight();
-			}
-		}
-	}
+
 	public void disableAllButOne(StoneButton excluded) {
 		for(Node n : this.getChildren()) {
 			if(n.getClass() == StoneButton.class) {

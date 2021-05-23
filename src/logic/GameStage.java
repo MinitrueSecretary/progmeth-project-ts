@@ -8,8 +8,6 @@ public class GameStage {
 	private static boolean peekingStage;
 	private static boolean challengingStage;
 	private static boolean boastingStage;
-	private static boolean pausingStage;
-	
 	private static boolean showdownStage;
 
 	public static void setAllToFalse() {
@@ -20,7 +18,6 @@ public class GameStage {
 		peekingStage = false;
 		challengingStage = false;
 		boastingStage = false;
-		pausingStage = false;
 		showdownStage = false;
 	}
 
@@ -32,13 +29,7 @@ public class GameStage {
 		GameStage.showdownStage = showdownStage;
 	}
 
-	public static boolean isPausingStage() {
-		return pausingStage;
-	}
 
-	public static void setPausingStage(boolean pausingStage) {
-		GameStage.pausingStage = pausingStage;
-	}
 
 	public static boolean isBoastingStage() {
 		return boastingStage;

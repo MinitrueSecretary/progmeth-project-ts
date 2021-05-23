@@ -103,6 +103,7 @@ public class Scoreboard extends VBox implements Highlightable{
 							TurnManager.showdownFail();
 						}
 					});
+					
 				}
 				catch(InterruptedException e) {
 					time = TIMELIMIT;
@@ -134,12 +135,24 @@ public class Scoreboard extends VBox implements Highlightable{
 					time = TIMELIMIT;
 					drawBlankTimeString();
 					//time out
-					if(!GameStage.isShowdownStage()) {
-						TurnManager.alternateTurns();
+					if(GameStage.isPlacing() && GameController.getSelectedstone() != null) {
+						GameController.getSelectedstone().setDisable(false);
 					}
-					else {
-						//showdown player lose
+					
+					if(GameStage.isSwapingStage() && GameController.isReadyToSwap()) {
+						int i = GameController.getStoneIndex1();
+						Platform.runLater(new Runnable() {
+							@Override
+							public void run() {
+								PlayZone.getStoneInPlay().get(i).setNewStoneImage();
+							}
+						});
+						GameController.setReadyToSwap(false);
 					}
+					GameStage.setAllToFalse();
+					TurnManager.alternateTurns();
+
+					
 				}
 
 				catch (InterruptedException e) {
@@ -213,7 +226,7 @@ public class Scoreboard extends VBox implements Highlightable{
 									TurnManager.yieldToStolenBoast();		
 									time = TIMELIMIT;
 									drawBlankTimeString();
-									System.out.println("Boast stolen false");
+									//System.out.println("Boast stolen false");
 									GameController.setBoastStolen(false);
 									GameStage.setBoastingStage(false);
 									TurnManager.alternateTurns();
@@ -280,7 +293,7 @@ public class Scoreboard extends VBox implements Highlightable{
 	}
 
 	public void setPlayernum(int playernum) {
-		if(playernum<=1)
+		if(playernum <= 1)
 			this.playernum = 1;
 		else
 			this.playernum = 2;

@@ -1,6 +1,5 @@
 package gameelement;
 
-import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -19,29 +18,12 @@ public class StonePlaceHolder extends Button {
 
 	private Stone placingStone;
 	private boolean isHidden;
-	private static Stone tempStone;
 	private static AudioClip stoneSFX;
 	private static AudioClip correctSFX;
 	private static AudioClip wrongSFX;
 
-	public static Stone getTempStone() {
-		return tempStone;
-	}
 
-	public static void setTempStone(Stone targetStone) {
-		StonePlaceHolder.tempStone = targetStone;
-	}
 
-	public boolean isHidden() {
-		return isHidden;
-	}
-
-	public void setHidden(boolean hidden) {
-		this.isHidden = hidden;
-		if(this.getPlacingStone() != null) {
-			this.getPlacingStone().setHidden(hidden);
-		}
-	}
 
 	public StonePlaceHolder() {
 		super();
@@ -66,7 +48,6 @@ public class StonePlaceHolder extends Button {
 		this.setPadding(new Insets(10));
 		this.setPlacingStone(null);
 		this.setHidden(false);
-		StonePlaceHolder.setTempStone(null);
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
@@ -77,13 +58,6 @@ public class StonePlaceHolder extends Button {
 
 	}
 
-	public Stone getPlacingStone() {
-		return placingStone;
-	}
-
-	public void setPlacingStone(Stone placingStone) {
-		this.placingStone = placingStone;
-	}
 
 	
 	private void OnclickHandler() {
@@ -117,6 +91,7 @@ public class StonePlaceHolder extends Button {
 			setNewStoneImage(placingStone.getUrl());
 			//System.out.println("Peeking");
 			TurnManager.interruptClock();
+			GameController.getCentralPane().getButtonpanel().getCancelButton().setDisable(true);
 			Thread thread = new Thread(() -> {
 				try {
 					TurnManager.getCurrentPlayerScoreboard().getTimerThread().join();
@@ -147,9 +122,10 @@ public class StonePlaceHolder extends Button {
 			if (!GameController.isReadyToSwap()) {
 				GameController.setStoneIndex1(PlayZone.getStoneInPlay().indexOf(this));
 				GameController.setReadyToSwap(true);
-				System.out.println("ready");
+				GameController.getCentralPane().getButtonpanel().getCancelButton().setDisable(true);
+				System.out.println("Swap 1 Selected");
 				this.enlarge();
-			} else {
+			} else if(GameController.getStoneIndex1() != PlayZone.getStoneInPlay().indexOf(this)){
 				stoneSFX.play();
 				GameController.setStoneIndex2(PlayZone.getStoneInPlay().indexOf(this));
 				GameController.swapStones();
@@ -195,7 +171,7 @@ public class StonePlaceHolder extends Button {
 				System.out.println(isCorrect?"Correct!":"Incorrect!");
 				TurnManager.getCurrentPlayerScoreboard().drawBlankTimeString();
 				GameController.getUtilityPaneShowdown().disableNotHiddens();
-				TurnManager.getCurrentPlayerScoreboard().getTimerThread().interrupt();
+				TurnManager.interruptClock();
 				
 				if(!isCorrect) {
 					wrongSFX.play();
@@ -238,18 +214,7 @@ public class StonePlaceHolder extends Button {
 		this.setGraphic(img);
 	}
 
-	public void resetSwapStone(ArrayList<StonePlaceHolder> list, int firstIndex, int secondIndex) {
-		list.get(firstIndex).setNewStoneImage(list.get(firstIndex).getPlacingStone().getUrl());
-		list.get(secondIndex).setNewStoneImage(list.get(secondIndex).getPlacingStone().getUrl());
-	}
-	
-	public void resetAllstone() {
-		for (StonePlaceHolder e : PlayZone.getStoneInPlay()) {
-			if (e.getPlacingStone() != null) {
-				e.setNewStoneImage(e.getPlacingStone().getUrl());
-			}
-		}
-	}
+
 	public void printAllStone() {
 		for (StonePlaceHolder e : PlayZone.getStoneInPlay()) {
 			if (e.getPlacingStone() != null) {
@@ -257,4 +222,24 @@ public class StonePlaceHolder extends Button {
 			}
 		}
 	}
+	
+	public boolean isHidden() {
+		return isHidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.isHidden = hidden;
+		if(this.getPlacingStone() != null) {
+			this.getPlacingStone().setHidden(hidden);
+		}
+	
+	}
+	public Stone getPlacingStone() {
+		return placingStone;
+	}
+
+	public void setPlacingStone(Stone placingStone) {
+		this.placingStone = placingStone;
+	}
+
 }

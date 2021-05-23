@@ -32,9 +32,9 @@ public class PlayZone extends GridPane {
 			StonePlaceHolder c = new StonePlaceHolder();
 			// System.out.println(c.toString());
 			stoneInPlay.add(c);
-			if (c.getPlacingStone() != null) {
+			/*if (c.getPlacingStone() != null) {
 				System.out.println(c.getPlacingStone().getStoneName());
-			}
+			}*/
 		}
 
 		for (int i = 0; i < 8; i++) {
@@ -43,13 +43,6 @@ public class PlayZone extends GridPane {
 
 	}
 
-	public static ArrayList<StonePlaceHolder> getStoneInPlay() {
-		return stoneInPlay;
-	}
-
-	public static void setStoneInPlay(ArrayList<StonePlaceHolder> stoneInPlay) {
-		PlayZone.stoneInPlay = stoneInPlay;
-	}
 	
 	public void highlightAllPlaceHolders() {
 		for(StonePlaceHolder s : stoneInPlay) {
@@ -76,7 +69,14 @@ public class PlayZone extends GridPane {
 		}
 		
 		return list;
-		
+	}
+	
+	public static ArrayList<StonePlaceHolder> getStoneInPlay() {
+		return stoneInPlay;
+	}
+
+	public static void setStoneInPlay(ArrayList<StonePlaceHolder> stoneInPlay) {
+		PlayZone.stoneInPlay = stoneInPlay;
 	}
 
 

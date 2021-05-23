@@ -27,7 +27,7 @@ public class UtilityPanePlace extends VBox implements UtilPane{
 		this.setAlignment(Pos.CENTER_LEFT);
 
 		Text guide = new Text(
-				"Place : These are stones which are not in play.\n" + "	   Select one to place it in the PlayZone.");
+				"Place : These are stones which are not in play.\n" + "	   Select one to place it in the Play Zone.");
 		guide.setFont(new Font("Gill Sans", 35));
 		guide.setFill(Color.WHITE);
 		UtilityPanePlace.setMargin(guide, new Insets(0, 40, 10, 20));
@@ -46,10 +46,12 @@ public class UtilityPanePlace extends VBox implements UtilPane{
 			for (StoneButton e : stoneList) {
 				e.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent arg0) {
-						if (GameStage.isPlacing() == true) {
+						
+						if (GameStage.isPlacing() && GameController.getSelectedstone() == null) {
 							GameController.setSelectedstone(e);
 							GameController.highlightPlayZonePlaceHolders();
 							
+							GameController.getCentralPane().getButtonpanel().getCancelButton().setDisable(true);
 							e.setDisable(true);
 							
 //							System.out.println(stoneList.size());
@@ -66,15 +68,7 @@ public class UtilityPanePlace extends VBox implements UtilPane{
 			}
 		}
 
-	
 
-		public static ArrayList<StoneButton> getStoneList() {
-			return stoneList;
-		}
-
-		public static void setStoneList(ArrayList<StoneButton> stoneList) {
-			StoneBox.stoneList = stoneList;
-		}
 		public StoneBox() {
 			super();
 			this.setPrefWidth(1100);

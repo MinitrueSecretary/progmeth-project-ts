@@ -40,6 +40,8 @@ public class TurnManager {
 		else {
 			player2.getTimerThread().interrupt();
 		}
+		GameController.getCentralPane().getButtonpanel().getCancelButton().setDisable(true);
+		
 	}
 	
 	public static void alternateTurns() {
@@ -83,14 +85,12 @@ public class TurnManager {
 	}
 	
 	public static void continueShowdown() {
-		if(isPlayer1Turn) {
-			player1.restartShowdownThread();
-			player1.startTimer();
-		}
-		else {
-			player2.restartShowdownThread();
-			player2.startTimer();
-		}
+		Scoreboard player = getCurrentPlayerScoreboard();
+			
+		player.restartShowdownThread();
+		player.startTimer();
+
+
 	}
 	
 	public static Scoreboard getCurrentPlayerScoreboard() {
@@ -102,7 +102,7 @@ public class TurnManager {
 	
 	
 	public static void startShowdown() {
-		getCurrentPlayerScoreboard().getTimerThread().interrupt();
+		interruptClock();
 		if(isPlayer1Turn == GameController.isBoastStolen()) {
 			isPlayer1Turn = false;
 			player2.restartShowdownThread();
@@ -156,9 +156,7 @@ public class TurnManager {
 		player1.setScore(player1Score);
 		if(player1Score >= 3) {
 			setWinner(1);
-			isGameEnd = true;
-			SceneManager.startGameEnd();
-			MainGameRoot.getBGMusic().stop();
+			gameEndSequence();
 		}
 	}
 	
@@ -167,9 +165,7 @@ public class TurnManager {
 		player2.setScore(player2Score);
 		if(player2Score >= 3) {
 			setWinner(2);
-			isGameEnd = true;
-			SceneManager.startGameEnd();
-			MainGameRoot.getBGMusic().stop();
+			gameEndSequence();
 		}
 	}
 	public static void showdownFail() {
@@ -180,8 +176,8 @@ public class TurnManager {
 		else {
 			setWinner(1);
 		}
-		isGameEnd = true;
-		SceneManager.startGameEnd();
+		
+		gameEndSequence();
 	}
 	
 	public static void showdownComplete() {
@@ -192,13 +188,16 @@ public class TurnManager {
 		else {
 			setWinner(2);
 		}
-		isGameEnd = true;
-		SceneManager.startGameEnd();
+		
+		gameEndSequence();
 	}
 	
 	public static void gameEndSequence() {
+		isGameEnd = true;
+		MainGameRoot.getShowdownBGM().stop();
 		GameStage.setAllToFalse();
-		getCurrentPlayerScoreboard().getTimerThread().interrupt();
+		interruptClock();
+		
 		SceneManager.startGameEnd();
 	}
 	
@@ -208,10 +207,6 @@ public class TurnManager {
 		return isGameEnd;
 	}
 
-	public static void setGameEnd(boolean isGameEnd) {
-		TurnManager.isGameEnd = isGameEnd;
-	}
-	
 	
 	public static int getPlayer1Score() {
 		return player1Score;

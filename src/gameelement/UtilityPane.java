@@ -1,7 +1,7 @@
 package gameelement;
 
 import base.UtilPane;
-import exception.ButtonNotExistException;
+import exception.ActionNotExistException;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -25,7 +25,7 @@ public class UtilityPane extends Canvas implements UtilPane{
 
 		try {
 			this.drawText(buttonname);
-		} catch (ButtonNotExistException e) {
+		} catch (ActionNotExistException e) {
 			this.drawDefaultBackground();
 		}
 	}
@@ -41,13 +41,13 @@ public class UtilityPane extends Canvas implements UtilPane{
 		this.gc.drawImage(bg, 0, 0);
 	}
 
-	public void drawText(String buttonname) throws ButtonNotExistException {
+	public void drawText(String actionname) throws ActionNotExistException {
 			gc.setFill(Color.WHITE);
 			gc.setFont(new Font("Century", 60));
-			gc.fillText(buttonname, 80, 100);
+			gc.fillText(actionname, 80, 100);
 			gc.setFont(new Font("Gill Sans", 40));
 			String guide;
-		switch (buttonname) {
+		switch (actionname) {
 		case "Hide":
 			guide = "Choose one stone to hide" ;
 			gc.fillText(guide, 100, 150);
@@ -65,7 +65,7 @@ public class UtilityPane extends Canvas implements UtilPane{
 			gc.fillText(guide, 100, 150);
 			break;
 		default:
-			throw new ButtonNotExistException();
+			throw new ActionNotExistException();
 		}
 		
 	

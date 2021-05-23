@@ -1,9 +1,9 @@
 package exception;
 
 @SuppressWarnings("serial")
-public class ButtonNotExistException extends Exception {
+public class ActionNotExistException extends Exception {
 
-	public ButtonNotExistException() {
+	public ActionNotExistException() {
 		super("This action does not exist in this variant of Tellstones!!!");
 		
 	}
